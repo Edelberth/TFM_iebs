@@ -1,0 +1,221 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[//]: <> (Primera pagina.) 
+
+[![image](/home/ion/TFM/logo_iebs.png)]()
+
+\vspace{62pt}
+
+
+\begin{center} 
+
+TITULO DEL TRABAJO DE FINAL DE MASTER
+
+\end{center}
+
+
+\vspace{68pt}
+
+ALUMNO:
+
+\vspace{6pt}
+
+Alberto Jiménez Rodríguez
+
+\vspace{80pt}
+
+PROGRAMA: 
+
+MASTER EN  BUSSINESS INTELLIGENCE AND DATA SCIENCE
+
+\vspace{96pt}
+
+NOMBRE DEL PROYECTO:	
+
+\newpage
+[//]: <> (2 pagina.) 
+
+# CONTENIDO 
+
+\vspace{60pt}
+
+1. [RESUMEN...............................................................5](#resumen)
+\vspace{12pt}
+
+2. [INTRODUCCIÓN........................................................5](#introducción)
+\vspace{12pt}
+
+3. [ESTADO DEL ARTE....................................................5](#estado-del-arte)
+\vspace{12pt}
+
+4. [OBJETIVOS............................................................5](#objetivos)
+\vspace{12pt}
+
+5. [SOLUCIÓN PLANTEADA..............................................5](#solución-planteada)
+\vspace{12pt}
+
+6. [EVALUACIÓN...........................................................5](#evaluación)
+\vspace{12pt}
+
+7. [RESULTADOS...........................................................5](#resultados)
+\vspace{12pt}
+
+8. [CONCLUSIONES Y TRABAJOS FUTUROS.............................5](#conclusiones-y-trabajos-futuros)
+\vspace{12pt}
+
+9. [REFERENCIAS..........................................................5](#referencias)
+
+
+
+\newpage
+## RESUMEN
+
+\vspace{30pt}
+
+El motivo no es otro que obtener una herramienta que nos de una perspectiva a nivel frecuencial del grupo de sonidos que deseamos analizar y permita saber si existen grupos con una componente frecuencial semejante o por el contrario el grupo analizado es un grupo heterogeneo.
+
+\vspace{6pt}
+
+La comparación se hace a traves del barrido frecuencial entre una muestra de referencia y las demás muestras de sonido, el resultado es procesado mediante la técnica de ML basada en aprendizaje no supervisado llamada reducción de dimensionalidad que permite establecer una comparación de similitud las muestras analizadas y determina como de diferentes o como de simiares son las muestras de sonido que hemos analizado.
+
+\vspace{80pt}
+
+## Abstract
+
+\vspace{30pt}
+
+The reason is none other than to obtain a tool that gives us a frequency level perspective of the group of sounds that we wish to analyse and allows us to know if there are groups with a similar frequency component or if, on the contrary, the group being analysed is a heterogeneous group.
+
+\vspace{6pt}
+
+The comparison is made through the frequency sweep between a reference sample and the other sound samples, the result is processed through the ML technique based on unsupervised learning called dimensionality reduction that allows establishing a similarity comparison between the analyzed samples and determines how different or how similar the sound samples are that we have analyzed.
+
+
+
+
+\newpage
+## INTRODUCCIÓN
+
+\vspace{30pt}
+
+En el ámbito audiovisual existe un perfil que es el diseñador de sonido, este es un profesional por lo general independiente que se dedica a la creación de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual. 
+
+\vspace{6pt}
+
+El resultado de esta labor es un trabajo metódico y artesanal donde el volumen de archivos de sonido que se genera para el desarrollo de un proyecto suele ser enorme, por lo que esto puede ocasionar una perdida de perspectiva tímbrica en el proceso creativo, pues a mayor volumen de muestras, es fácil que los sonidos acaben siendo parecidos y como consecuencia de ello la originalidad del trabajo puede verse mermada.
+
+\vspace{6pt}
+
+Una herramienta que analice las muestras que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorrará mucho tiempo a la hora de tomar decisiones de carácter creativo, ya que permitirá establecer un punto de partida a partir de una muestra (la quiera tomarse como referencia en el trabajo) y conocer cuál es el carácter de ese grupo de muestras y por tanto el trabajo que se está llevando a cabo.
+
+\vspace{6pt}
+
+La solución propuesta es la aplicación de una de las técnicas vistas en el Master con Diego Calvo, referente al escalamiento multidimensional. Si bien es cierto que la solución no pretende ser innovadora, unicamente se busca implementar el conocimiento adquirido de una manera lo mas original posible evitando trabajar con datasets que no sean propios y aplicando aquello que se ha aprendido en un campo de trabajo completamente diferente.  
+
+\vspace{6pt}
+
+El trabajo ha sido llevado a cabo enteramente con Rstudio
+
+
+
+\newpage
+## ESTADO DEL ARTE
+
+\vspace{30pt}
+
+En este apartado el estudiante deberá reportar al menos 30 artículos, proyectos, o bibliografía disponible en buscadores científicos que describan cómo se ha afrontado el problema que él está tratando de solucionar, justificando con esta literatura la relevancia de la solución que ha planteada.
+Un proyecto de master implica que el estudiante se acerque al planteamiento de un problema poco explorado en la literatura y que ofrezca una solución innovadora al mismo.
+Por tanto, el estado del arte debe tener un sub-apartado de conclusiones en el cual el estudiante justifique el carácter innovador y de nuevo conocimiento de su TFM.
+
+Fuentes que he utilizado como punto de partida y en las que inspirado el trabajo:
+
+el ejemplo de escalamiento multidimensional mediante aprendizaje no supervisado que Diego Calvo presentó en la clase de ML del Master.
+
+https://www.sononym.net/ es un sample browser, una utilidad cada vez mas imprescindible dentro del mundo de la musica.
+
+
+
+https://www.sononym.net/docs/manual/similarity-search/#aspects-dial
+
+https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
+
+
+
+
+https://marceloarayasalas.weebly.com/
+
+La detección de 
+
+
+https://marce10.github.io/2020/06/15/Automatic_signal_detection-_a_case_study.html
+
+https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12624
+
+
+
+
+
+Las funciones que tiene esta herramienta son las que 
+
+
+
+\newpage
+## OBJETIVOS
+
+En este apartado el estudiante definirá el objetivo general de su Trabajo Final de Máster y máximo 4 objetivos específicos que describan cómo llevó a cabo el objetivo general.
+
+
+El objetivo general debe dar solución a problema realmente retador en el área del BI o DS, y debe haber quedado bien justificado en el estado del arte.
+Objetivo general:
+
+
+Queremos conseguir con la elaboración de nuestro trabajo:
+
+
+“Determinar el grado de efectividad en alumnos de ...”
+
+
+Objetivos específicos
+
+
+    1. Objetivo 1:
+       “Subobjetivos que necesitamos alcanzar para conseguir el general”
+    2. Objetivo 2
+    3. Objetivo 3
+    4. Objetivo 4
+
+Extensión máxima: 1 página.
+
+\newpage
+## SOLUCIÓN PLANTEADA
+
+En esta sección el estudiante debe describir la solución planteada, comenzando por la metodología (pasos que siguió) de desarrollo. Posteriormente la descripción del desarrollo de cada etapa seguida. 
+La metodología que debe utilizar el estudiante de master debe estar validada por la comunidad científica y el estudiante debe justificarlo.
+    1. METODOLOGÍA
+        ◦ Etapa 1
+        ◦ Etapa 2
+        ◦ Etapa 3
+        ◦ Etapa 4
+        ◦ Etapa 5
+    2. DESARROLLO DE CADA ETAPA
+Extensión máxima: 30 páginas.
+
+\newpage
+## EVALUACIÓN
+
+\newpage
+## RESULTADOS
+
+\newpage
+## CONCLUSIONES Y TRABAJOS FUTUROS
+
+\newpage
+## REFERENCIAS
+
