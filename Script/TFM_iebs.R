@@ -143,27 +143,19 @@ valores$eig
 valores$GOF
 
 # Definir un grafo de tamaño 5 para poder incluir todos los elementos
-grafo <- graph.full(ncol(xcor))
-
 grafala <- graph.tree(ncol(xcor),mode = c("out"))
 
 
 # Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
 #colnames(xcor)
-V(grafo)$label <- colnames(xcor)
-
 V(grafala)$label <- colnames(xcor)
 
-
-
-layout <- layout.mds(grafo, dist = as.matrix(distancia))
 layout <- layout.mds(grafala, dist = as.matrix(distancia))
 
-
 graphics.off()
-plot(grafo,  layout = layout, vertex.size = 0.5)
 
-plot(grafala, vertex.size = .1)
+
+#plot(grafala, vertex.size = .1)
 plot(grafala,  layout = layout, vertex.size = 0.5)
 
 vertex_attr_names(grafala)
