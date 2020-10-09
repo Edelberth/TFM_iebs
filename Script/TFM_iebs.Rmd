@@ -169,7 +169,7 @@ Ut mollis non enim ultricies fermentum. In ac aliquet dui, eget interdum magna. 
 
 \vspace{30pt}
 
-En el ámbito audiovisual existe un perfil que es el diseñador de sonido, este es un profesional por lo general independiente que se dedica a la creación de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual en el que esté trabajando. 
+En el ámbito audiovisual existe un perfil profesional que es el diseñador de sonido. Este es un profesional por lo general independiente que se dedica a la creación de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual en el que esté trabajando. 
 
 \vspace{6pt}
 
@@ -274,20 +274,20 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 
 \vspace{12pt}
 
-1. Tomar una muestra como referencia y analizar el contenido frecuencial
+1. Tomar una muestra como referencia y analizar el contenido frecuencial.
 
 
-2. Comparar el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia
+2. Comparar el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia y las demás muestras.
 
 
-3. Definir el modelo.
-    + 3.1 Convertir la matriz de correlación en una matriz simetrica que contenga las diferencias.
+3. Definición del modelo:
+    + 3.1 Convertir la matriz de correlación en una matriz de disimilud.
     
     + 3.2 Ejecutar un escalado multidimensional.
     
     + 3.3 Calcular las distancias entre los elementos.
 
-4. Evalución del modelo
+4. Evaluación del modelo:
     + 4.1 Visualización en diagrama de Boxplot entre las muestras.
     
     + 4.2  Visualizacion en diagrama de dispersion.
@@ -315,9 +315,9 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 \vspace{30pt}
 
 
-La metodología utilizada se basa en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo.
+La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo.
 
-Tres conjuntos con una serie de caracteristas particulares a modo de referencia ayudan a determinar el correcto funcionamiento del modelo:
+Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
 
 \vspace{15pt}
 
@@ -342,6 +342,10 @@ Hardware:
 Make Noise 0 Coast:
 
 Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia una u otra costa.
+
+<center>
+[![fig.1](/home/ion/TFM/0Coast.jpeg)](fig.1) 
+</center>
 
 El motivo por el que se elige la utilización de este sintetizador, es que permite la utilización de técnicas de síntesis empleadas en sistemas modulares que incluyenn la adición de sobretonos armónicos en la señal que hayamos generado.
 
@@ -389,6 +393,202 @@ hacer uso de warbleR y de las librerias de las que depende, que tiene por objeto
 
 
 Una vez encontrada la manera de poder analizar las muestras de sonido , organizaron un seminario informativo con la dirección y el profesorado para explicarles los objetivos de la investigación y para obtener las autorizaciones de los padres (ya que era un estudio en el que participan menores de edad).
+
+```{r 01 Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla}
+# Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla:
+
+plantilla <- data.frame(sound.files = "X_pitch-02.wav",
+                        selec = 2, # Seleccionaremos la segunda muestra
+                        channel = 1, 
+                        start = 0,
+                        end = 0.2,
+                        stringsAsFactors = FALSE)
+```
+
+
+
+```{r 01 creamos un objeto wav mediante el dataframe plantilla }
+# creamos un objeto wav mediante el dataframe plantilla 
+wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
+
+```
+
+```{r 02 limites establecidos en el filtro pasabanda}
+low_freq = 0                    # limites del filtro pasabanda (sin  limite) 
+high_freq= 20
+
+```
+
+
+```{r 03 Representación espectral de la muestra de referencia }
+# PLOT
+# muestra del analisis espectral de la muestra de referencia
+spectro(wave,
+        wl = 512,
+        # zp = TRUE,
+        # ovlp = 30,
+        # scale = TRUE,
+        # osc = TRUE,
+        # #flim = c(low_freq, high_freq ),
+        # noisereduction = TRUE,
+        # fastdisp = TRUE,
+        # dB = 'max0',
+        # flog = TRUE,
+        # grid = TRUE,
+        # collevels=seq(-115,0,10),
+        # fftw = TRUE,
+)
+```
+
+
+```{r}
+# Creación de un nuevo dataframe con todos los archivos de sonido en nuestro espacio de trabajo 
+# con los que vamos a trabajar.
+
+sel_tab_1 <- selection_table(whole.recs = TRUE)
+```
+
+
+```{r}
+# añadimos la plantilla inicial al dataframe anterior 
+# Nota:(Ahora tenemos el archivo de referencia repetido)
+
+sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
+
+# Establecemos la comparación de las muestras entre si:
+comp_matrix <- cbind(paste(sel_tab$sound.files[1],
+                           sel_tab$selec[1], sep = "-"),
+                     sel_tab$sound.files)
+```
+
+
+```{r}
+xc_output <- xcorr(X = sel_tab,
+           output = 'list',
+           compare.matrix = comp_matrix,
+           bp = c(low_freq, high_freq),
+           na.rm = TRUE)
+```
+
+
+```{r}
+matriz_principal <- data.frame(xc_output$scores$sound.files, 
+                               xc_output$scores$score) # conversion de matriz a df # sel_tab$sound.files
+```
+
+
+
+```{r}
+# Esta es la matríz de correlación cruzada tiempo-frecuencia
+xcor <- xcorr(X = sel_tab_1,
+              bp = c(low_freq, 
+                     high_freq), 
+              wl = 512,
+              ovlp = 99,
+              path = NULL,
+              type = "mfcc", 
+              na.rm = TRUE)
+
+```
+
+
+```{r}
+# Ejecutar una matriz simétrica completa que contiene las disimilitudes 
+
+Dissimilarity <- daisy(xcor)
+```
+
+
+```{r}
+# Ejecutar el escalado multidimensional (CMS)
+modelo <- cmdscale(Dissimilarity)
+
+```
+
+
+```{r}
+# Calcular las distancias entre elementos
+distancia <- dist(xcor, method = "euclidean")
+```
+
+
+# EVALUACION EL MODELO
+#-------------------------------------------------------------------------------------
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+# 2) Visualizacion en diagrama de dispersion
+# 3) Visualizacion en grafo
+
+
+```{r }
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+#-------------------------------------------------------------------------------------
+graphics.off()
+old.par <- par(mfrow=c(1, 2))
+plot(matriz_principal, type = "d", xlab = "Coord.1", ylab = "Coord.2")
+#text(matriz_principal[,1], matriz_principal[,2], labels = rownames(matriz_principal)) 
+plot(xcor, type = "p", xlab = "Coord.1", ylab = "Coord.2")
+#text(xcor[,1], xcor[,2], labels = rownames(xcor)) 
+par(old.par)
+```
+
+
+
+```{r}
+# Las dos primeras coordenadas principales (valores propios) son:
+valores <- cmdscale(distancia, eig = T)
+```
+
+
+
+
+
+
+
+```{r}
+#Valores propios calculados
+valores$eig
+
+# Determinar el ajuste
+valores$GOF
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# Definir un grafo de tamaño 5 para poder incluir todos los elementos
+grafala <- graph.tree(ncol(xcor),mode = c("out"))
+
+
+# Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
+#colnames(xcor)
+V(grafala)$label <- colnames(xcor)
+
+layout <- layout.mds(grafala, dist = as.matrix(distancia))
+
+graphics.off()
+
+#plot(grafala, vertex.size = .1)
+plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
+
+```
+
+
+
+
+
+
+
 
 Por último, explican que la investigación consistió en la aplicación de los instrumentos (o sea, los cuestionarios) de forma individual y anónima, durante el horario escolar.
 

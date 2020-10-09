@@ -39,21 +39,21 @@ high_freq= 20
 
 # PLOT
 # muestra del analisis espectral de la muestra de referencia
-# spectro(wave,
-#         wl = 512,
-#         # zp = TRUE,
-#         # ovlp = 30,
-#         # scale = TRUE,
-#         # osc = TRUE,
-#         # #flim = c(low_freq, high_freq ), 
-#         # noisereduction = TRUE,
-#         # fastdisp = TRUE,
-#         # dB = 'max0',
-#         # flog = TRUE,
-#         # grid = TRUE,
-#         # collevels=seq(-115,0,10),
-#         # fftw = TRUE,
-# )
+spectro(wave,
+        wl = 512,
+        # zp = TRUE,
+        # ovlp = 30,
+        # scale = TRUE,
+        # osc = TRUE,
+        # #flim = c(low_freq, high_freq ),
+        # noisereduction = TRUE,
+        # fastdisp = TRUE,
+        # dB = 'max0',
+        # flog = TRUE,
+        # grid = TRUE,
+        # collevels=seq(-115,0,10),
+        # fftw = TRUE,
+)
 
 # Creación de un nuevo dataframe con todos los archivos de sonido en nuestro espacio de trabajo 
 # con los que vamos a trabajar.
