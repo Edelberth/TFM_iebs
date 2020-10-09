@@ -6,48 +6,89 @@ rm(list = ls()) # Limpiar la memoria
 #Please see citation('warbleR') for use in publication
 #install.packages("seewave")
 
-#install.packages("dynaSpec")
-#install.packages("viridisLite")
+# INSTALAR LIBRERIAS
+#---------------------------------------------------------------------------------------
+install.packages("rmarkdown")
 
-#load package
-#library(dynaSpec)
-
-# and load other dependencies
-#library(viridis)
-
-#load packages
+library(cluster) # daisy
 library(tuneR)
 library(knitr)
 library(NatureSounds)
 library(seewave)
-library(warbleR)
+library(warbleR) 
+library(igraph) 
 
-library(igraph)  # Cargar el conjunto de datos a utilizar
+# CARGAR LOS DATOS
+#-------------------------------------------------------------------------------------
 
-#library(audio)
-
-
-getwd()
-
-
-# construimos un data frame a modo de plantilla con la muestra de referencia:
+# Data frame con la muestra de referencia que utilizaremos como plantilla:
 
 plantilla <- data.frame(sound.files = "X_pitch-02.wav",
                         selec = 2, # Seleccionaremos la segunda muestra
                         channel = 1, 
                         start = 0,
-                        end = 20,
+                        end = 0.2,
                         stringsAsFactors = FALSE)
 
-# creamos un objeto de la muestra mediante el dataframe plantilla 
+# creamos un objeto wav mediante el dataframe plantilla 
 wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
 
 
-low_freq = 0                    # los limites del filtro pasabanda 
+low_freq = 0                    # limites del filtro pasabanda (sin  limite) 
 high_freq= 20
 
-# plot
+# PLOT
 # muestra del analisis espectral de la muestra de referencia
+# spectro(wave,
+#         wl = 512,
+#         # zp = TRUE,
+#         # ovlp = 30,
+#         # scale = TRUE,
+#         # osc = TRUE,
+#         # #flim = c(low_freq, high_freq ), 
+#         # noisereduction = TRUE,
+#         # fastdisp = TRUE,
+#         # dB = 'max0',
+#         # flog = TRUE,
+#         # grid = TRUE,
+#         # collevels=seq(-115,0,10),
+#         # fftw = TRUE,
+# )
+
+# Creación de un nuevo dataframe con todos los archivos de sonido en nuestro espacio de trabajo 
+# con los que vamos a trabajar.
+
+sel_tab_1 <- selection_table(whole.recs = TRUE)
+
+# añadimos la plantilla inicial al dataframe anterior 
+# Nota:(Ahora tenemos el archivo de referencia repetido)
+
+sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
+
+# Establecemos la comparación de las muestras entre si:
+comp_matrix <- cbind(paste(sel_tab$sound.files[1],
+                           sel_tab$selec[1], sep = "-"),
+                     sel_tab$sound.files)
+
+
+old.par <- par(mfrow=c(2, 4))
+
+spectro(wave,
+        wl = 512,
+        # zp = TRUE,
+        # ovlp = 30,
+        # scale = TRUE,
+        # osc = TRUE,
+        # #flim = c(low_freq, high_freq ), 
+        # noisereduction = TRUE,
+        # fastdisp = TRUE,
+        # dB = 'max0',
+        # flog = TRUE,
+        # grid = TRUE,
+        # collevels=seq(-115,0,10),
+        # fftw = TRUE,
+        )
+
 spectro(wave,
         wl = 512,
         # zp = TRUE,
@@ -65,21 +106,8 @@ spectro(wave,
 )
 
 
-
-# Creación de un nuevo dataframe con los archivos de sonido en nuestro espacio de trabajo con los que vamos a trabajar
-sel_tab_1 <- selection_table(whole.recs = TRUE)
-
-# añadir la plantilla inicial al dataframe anterior (Ahora tenemos ek archivo de referencia repetido)
-sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
-
-# Establecemos como vamos a comparar las muestras entre si
-comp_matrix <- cbind(paste(sel_tab$sound.files[1],
-                           sel_tab$selec[1], sep = "-"),
-                     sel_tab$sound.files)
-
-
-
 # xcorr estima la similitud de dos ondas sonoras por medio de la correlación cruzada tiempo-frecuencia
+# https://www.youtube.com/watch?v=sfsIhX2lQxw
 
 #  ("lista") que contiene:
 # 1) la matriz de correlación 
@@ -88,50 +116,74 @@ comp_matrix <- cbind(paste(sel_tab$sound.files[1],
 # La lista, que también es de la clase 'xcorr.output', puede utilizarse para encontrar picos de detección con find_peaks o 
 # para explorar gráficamente las detecciones utilizando lspe
 
+# https://www.youtube.com/watch?v=sfsIhX2lQxw
+
 xc_output <- xcorr(X = sel_tab,
-                   output = 'list', 
-                   compare.matrix = comp_matrix, 
-                   bp = c(low_freq, high_freq), 
-                   na.rm = TRUE)
+           output = 'list',
+           compare.matrix = comp_matrix,
+           bp = c(low_freq, high_freq),
+           na.rm = TRUE)
+
+# la salida es una lista
 
 matriz_principal <- data.frame(xc_output$scores$sound.files, 
                                xc_output$scores$score) # conversion de matriz a df # sel_tab$sound.files
 
+# Esta es la matríz de correlación cruzada tiempo-frecuencia
 xcor <- xcorr(X = sel_tab_1,
-              bp = c(low_freq, high_freq), 
+              bp = c(low_freq, 
+                     high_freq), 
               wl = 512,
-              ovlp = 90,
+              ovlp = 99,
               path = NULL,
               type = "mfcc", 
               na.rm = TRUE)
 
-#ip = as.data.frame(installed.packages()[,c(1,3:4)])
-#ip = ip[is.na(ip$Priority),1:2,drop=FALSE]
-#ip
 
-# EXPLORAR DATOS
+
+# EXPLORAMOS DATOS
 #---------------------------------------------------------------------------------------
 xcor
-dim(xcor)
+
 
 # DEFINIMOS EL MODELO
-#---------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------       -------
 
-#Ejecutar el escalado multidimensional
-#modelo <- cmdscale(xcor)
+# Ejecutar una matriz simétrica completa que contiene las disimilitudes 
+
+Dissimilarity <- daisy(xcor)
+
+
+# Ejecutar el escalado multidimensional (CMS)
+modelo <- cmdscale(Dissimilarity)
 
 # Visualización del modelo resultante
-#modelo
+modelo
 
 # Calcular las distancias entre elementos
 distancia <- dist(xcor, method = "euclidean")
-class(distancia)
-dim(distancia)
 
-#Visualizar los objetos como puntos de un mapa de dimension dos
+# EVALUACION EL MODELO
+#-------------------------------------------------------------------------------------
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+# 2) Visualizacion en diagrama de dispersion
+# 3) Visualizacion en grafo
+
+
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+#-------------------------------------------------------------------------------------
 graphics.off()
-plot(xcor, type = "b", xlab = "Coord.1", ylab = "Coord.2")
-text(xcor[,1], xcor[,2], labels = rownames(xcor)) 
+old.par <- par(mfrow=c(1, 2))
+plot(matriz_principal, type = "d", xlab = "Coord.1", ylab = "Coord.2")
+#text(matriz_principal[,1], matriz_principal[,2], labels = rownames(matriz_principal)) 
+
+# 2) Visualizacion en diagrama de dispersion
+#-------------------------------------------------------------------------------------
+
+
+plot(xcor, type = "p", xlab = "Coord.1", ylab = "Coord.2")
+#text(xcor[,1], xcor[,2], labels = rownames(xcor)) 
+par(old.par)
 
 # Las dos primeras coordenadas principales (valores propios) son:
 valores <- cmdscale(distancia, eig = T)
@@ -146,21 +198,18 @@ valores$GOF
 grafala <- graph.tree(ncol(xcor),mode = c("out"))
 
 
+
 # Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
 #colnames(xcor)
 V(grafala)$label <- colnames(xcor)
+
 
 layout <- layout.mds(grafala, dist = as.matrix(distancia))
 
 graphics.off()
 
-
 #plot(grafala, vertex.size = .1)
-plot(grafala,  layout = layout, vertex.size = 0.5)
-
-vertex_attr_names(grafala)
-
-
+plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
 
 
 
