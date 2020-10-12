@@ -122,7 +122,7 @@ NOMBRE DEL PROYECTO:
 
 \vspace{30pt}
 
-Disponer de una herramienta que permita analizar las componentes frecuenciales de un grupo de muestras de sonido, permitiendo la visualización en un espacio bidimensional de sus diferencias para una rápida identificación. 
+Disponer de un método que nos permita la clasificación de un grupo de muestras de audio mediante el analisis de sus frecuencias. Analisis que posteriormente será visualizado en un espacio bidimensional y donde se podrá apreciar como de parecidas o diferentes son las muestras entre ellas.  
 
 \vspace{6pt}
 
@@ -137,7 +137,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In suscipit lectus sapi
 
 \vspace{6pt}
 
-Ut mollis non enim ultricies fermentum. In ac aliquet dui, eget interdum magna. Suspendisse gravida volutpat nisl, non consequat neque porttitor eu. Aliquam fermentum porttitor turpis at facilisis. Phasellus iaculis purus et risus bibendum, eget tincidunt mauris imperdiet. Integer id ultricies neque. Proin varius nisl eu convallis placerat. Mauris ultricies mattis hendrerit. Nulla vitae urna nec lectus porta vestibulum. Donec gravida, dolor eget maximus blandit, neque tortor tristique justo, nec dapibus nisi nisi ac urna. Morbi ultricies arcu maximus est gravida, sit amet rhoncus turpis ornare.
+
 
 
 
@@ -181,15 +181,9 @@ Una herramienta que analice las muestras en las que el profesional está trabaja
 
 \vspace{6pt}
 
-La solución propuesta es la aplicación de una de las técnicas vistas en el Master con Diego Calvo, referente al escalamiento multidimensional. Si bien es cierto que la solución no pretende ser innovadora, unicamente se busca implementar el conocimiento adquirido de una manera lo mas original posible evitando trabajar con datasets que no sean propios y aplicando aquello que se ha aprendido en un campo de trabajo completamente diferente.  
+La solución propuesta para conseguir tal fin es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), referente al escalamiento multidimensional. 
 
-\vspace{6pt}
-
-
-
-
-
-
+Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, es igualmente cierto que lo principalmente que se busca es la implementación del conocimiento adquirido en ML de la manera mas original posible evitando la dependencia de datasets externos a traves de un campo como es el audio en el que me siento cómodo y siendo honesto con lo aprendido. 
 
 
 
@@ -226,7 +220,7 @@ https://marce10.github.io/2020/06/15/Automatic_signal_detection-_a_case_study.ht
 
 \vspace{15pt}
 
-Sononym. "navegador de muestras de audio", utilidad que permite la catalogación de las muestras de audio a traves del analisis de la muestra.
+Sononym. "navegador de muestras de audio", utilidad que permite la catalogación de las muestras de audio a traves del analisis de las muestras.
 
 No he podido encontrar los principios cientificos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada y por ese motivo no son publicos, sin embargo en la publicidad del producto que ofrecen el principio de funcionamiento hace referencia al análisis de las muestras de sonido mediante Machine Learning para hacer la categorización de las muestras.
 
@@ -266,7 +260,7 @@ https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
 \vspace{30pt}
 
-Visualizar la relación frecucial existente hay entre los elementos de un conjunto de muestras de sonido.
+Visualizar la relación frecuencial existente que hay entre los elementos de un conjunto de muestras de sonido.
 
 \vspace{12pt}
 
@@ -277,10 +271,10 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 1. Tomar una muestra como referencia y analizar el contenido frecuencial.
 
 
-2. Comparar el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia y las demás muestras.
+2. Comparar las demás muestras con el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia. 
 
 
-3. Definición del modelo:
+3. Definir el modelo:
     + 3.1 Convertir la matriz de correlación en una matriz de disimilud.
     
     + 3.2 Ejecutar un escalado multidimensional.

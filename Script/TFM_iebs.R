@@ -71,39 +71,7 @@ comp_matrix <- cbind(paste(sel_tab$sound.files[1],
                      sel_tab$sound.files)
 
 
-old.par <- par(mfrow=c(2, 4))
 
-spectro(wave,
-        wl = 512,
-        # zp = TRUE,
-        # ovlp = 30,
-        # scale = TRUE,
-        # osc = TRUE,
-        # #flim = c(low_freq, high_freq ), 
-        # noisereduction = TRUE,
-        # fastdisp = TRUE,
-        # dB = 'max0',
-        # flog = TRUE,
-        # grid = TRUE,
-        # collevels=seq(-115,0,10),
-        # fftw = TRUE,
-        )
-
-spectro(wave,
-        wl = 512,
-        # zp = TRUE,
-        # ovlp = 30,
-        # scale = TRUE,
-        # osc = TRUE,
-        # #flim = c(low_freq, high_freq ), 
-        # noisereduction = TRUE,
-        # fastdisp = TRUE,
-        # dB = 'max0',
-        # flog = TRUE,
-        # grid = TRUE,
-        # collevels=seq(-115,0,10),
-        # fftw = TRUE,
-)
 
 
 # xcorr estima la similitud de dos ondas sonoras por medio de la correlación cruzada tiempo-frecuencia
