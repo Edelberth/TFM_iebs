@@ -3,8 +3,11 @@ title: ''
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+
+
+```{r setup }
+knitr::opts_chunk$set(comment = NA)
 ```
 
 [//]: <> (Primera pagina.) 
@@ -211,6 +214,11 @@ Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, e
 
 Fuentes que he utilizado como punto de partida y en las que inspirado el trabajo:
 
+
+\vspace{15pt}
+
+Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
+
 \vspace{15pt}
 
 Caso de estudio en la investigación de los murciélagos con alas de disco de Spix (Thyroptera tricolor), biblioteca de funciones llamada warbleR.
@@ -227,16 +235,9 @@ No he podido encontrar los principios cientificos en los que se apoya esta aplic
 https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
 
-\vspace{15pt}
+\vspace{45pt}
 
 
-
-
-\vspace{15pt}
-
-
-
-\vspace{15pt}
 
 
 
@@ -260,7 +261,7 @@ https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
 \vspace{30pt}
 
-Visualizar la relación frecuencial existente que hay entre los elementos de un conjunto de muestras de sonido.
+Visualizar la relación existente que hay entre los elementos de un conjunto de muestras de sonido y sus frecuencias.
 
 \vspace{12pt}
 
@@ -281,7 +282,7 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
     
     + 3.3 Calcular las distancias entre los elementos.
 
-4. Evaluación del modelo:
+4. Evaluar el modelo:
     + 4.1 Visualización en diagrama de Boxplot entre las muestras.
     
     + 4.2  Visualizacion en diagrama de dispersion.
@@ -306,42 +307,35 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 \newpage
 ## SOLUCIÓN PLANTEADA
 
-\vspace{30pt}
-
-
-La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo.
-
-Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
-
 \vspace{15pt}
 
+
+La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo. Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
+
+\vspace{15pt}
 
 
 \  Conjunto A: Muestras con distinta frecuencia, misma duración y con una componente armónica similar (escala musical).
 
 \  Conjunto B: Muestras con la misma frecuencia, misma duración y con una componente armónica diferente (armónicos).
 
-\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (outlayers del conjunto) pretenden ser los elementos disruptivos en el analisis del conjunto.
+\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (pretenden ser los outlayers del conjunto) elementos disruptivos en el analisis del conjunto.
 
 \vspace{15pt}
 
-1. Instrumentos
+## 1. Elementos utilizados:
 
-Los instrumentos utilizados en la investigación han sido:
-
-\vspace{15pt}
-
-Hardware:
+\vspace{14pt}
 
 Make Noise 0 Coast:
 
-Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia una u otra costa.
+Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". La adición de armónicos en la señal que generada es el motivo principal de uso de este sintetizador.
 
 <center>
-[![fig.1](/home/ion/TFM/0Coast.jpeg)](fig.1) 
-</center>
 
-El motivo por el que se elige la utilización de este sintetizador, es que permite la utilización de técnicas de síntesis empleadas en sistemas modulares que incluyenn la adición de sobretonos armónicos en la señal que hayamos generado.
+![0 Coast Makenoise](/home/ion/TFM/0Coast.jpeg)
+
+</center>
 
 
 http://www.makenoisemusic.com/synthesizers/ohcoast
@@ -350,43 +344,75 @@ https://www.soundonsound.com/reviews/make-noise-0-coast
 
 \vspace{15pt}
 
-Software:
-
 Audacity
 
 Aplicación informática multiplataforma libre, que se puede usar para grabación y edición de audio, distribuido bajo la licencia GPLv2+.
 
-
 https://es.wikipedia.org/wiki/Audacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \newpage
 
-2. Procedimiento
+## 2. Procedimiento
 
-Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemplo de escalamiento multidimensional, para ello se hizo uso de warbleR, biblioteca de funciones de que tiene por objeto facilitar el análisis de la estructura de las señales acústicas de los animales en R. 
+\vspace{14pt}
 
+Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemplo de escalamiento multidimensional, para ello fué necesario el uso de warbleR, una biblioteca de funciones en R que tiene por objeto facilitar el análisis de la estructura de señales acústicas de animales. 
 
+\vspace{14pt}
 
-We have invested a lot of time and effort in creating R, please cite it when using it for
-data analysis. See also ‘citation("pkgname")’ for citing R packages.
 
 ``` {r INSTALAR LIBRERIAS}
 # INSTALAR LIBRERIAS
 #---------------------------------------------------------------------------------------
-library(cluster) # daisy
+library(cluster) # dadisy
 library(tuneR)
 library(knitr)
 library(NatureSounds)
 library(seewave)
 library(warbleR) 
-library(igraph) # 
+library(igraph) # hacer mencion al final no lo he hecho
 ```
 
-hacer uso de warbleR y de las librerias de las que depende, que tiene por objeto facilitar el análisis de la estructura de las señales acústicas de los animales en R, herramienta ideal para el analisis de  las muestras que necesitabamos hacerLos usuarios pueden recopilar grabaciones aviares de libre acceso o introducir sus propios datos en un flujo de trabajo que facilite la visualización espectrográfica y la medición de los parámetros acústicos. warbleR hace uso de las herramientas de análisis de sonido fundamentales del paquete de ondas marinas y ofrece nuevas herramientas para el análisis de la estructura acústica. Estas herramientas están disponibles para el análisis por lotes de señales acústicas.
 
+\newpage
 
-Una vez encontrada la manera de poder analizar las muestras de sonido , organizaron un seminario informativo con la dirección y el profesorado para explicarles los objetivos de la investigación y para obtener las autorizaciones de los padres (ya que era un estudio en el que participan menores de edad).
+\vspace{15pt}
+
+Una vez que ya hemos cargado las bibliotecas de funciones (librerias) para analizar las muestras de sonido, creamos un data frame en el que crearemos las columnas a partir de la introducción del nombre de la muestra que queremos comparar, canal (uno o los dos) , inicio de muestra, final y "selec" = 2.  
+
+\vspace{14pt}
+
 
 ```{r 01 Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla}
 # Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla:
@@ -395,75 +421,185 @@ plantilla <- data.frame(sound.files = "X_pitch-02.wav",
                         selec = 2, # Seleccionaremos la segunda muestra
                         channel = 1, 
                         start = 0,
-                        end = 0.2,
+                        end = 0.2952381,
                         stringsAsFactors = FALSE)
 ```
 
+\vspace{15pt}
 
+Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posición del dataframe "**plantilla**"
+
+El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
+
+\vspace{15pt}
 
 ```{r 01 creamos un objeto wav mediante el dataframe plantilla }
-# creamos un objeto wav mediante el dataframe plantilla 
+# creamos un objeto wav  
 wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
-
+wave
 ```
 
-```{r 02 limites establecidos en el filtro pasabanda}
-low_freq = 0                    # limites del filtro pasabanda (sin  limite) 
+Establecemos que frecuencia (KHz) queremos visualizar en el eje Y del grafico. 
+
+\vspace{15pt}
+```{r 02 limites de frecuencia en Y}
+low_freq = 0
 high_freq= 20
-
 ```
 
 
-```{r 03 Representación espectral de la muestra de referencia }
-# PLOT
-# muestra del analisis espectral de la muestra de referencia
-spectro(wave,
-        wl = 512,
-        # zp = TRUE,
-        # ovlp = 30,
-        # scale = TRUE,
-        # osc = TRUE,
-        # #flim = c(low_freq, high_freq ),
-        # noisereduction = TRUE,
-        # fastdisp = TRUE,
-        # dB = 'max0',
-        # flog = TRUE,
-        # grid = TRUE,
-        # collevels=seq(-115,0,10),
-        # fftw = TRUE,
-)
+\newpage
+
+\vspace{15pt}
+
+Representación espectrográfica bidimensional de la señal de referencia a lo largo del tiempo:
+
+
+```{r PLOT  }
+
+# spectro(wave,
+#         wl = 1024,
+#         ovlp = 99,
+#         scale = TRUE,
+#         cont = TRUE,
+#         flim = c(low_freq, high_freq ),
+#         noisereduction = TRUE,
+#         # fastdisp = TRUE,
+#         dB = 'max0',
+#         flog = TRUE,
+#         grid = TRUE,
+#         collevels=seq(-115,0,10),
+#         )
 ```
 
+Los parametros elegidos para representar la señal han sido:
 
-```{r}
-# Creación de un nuevo dataframe con todos los archivos de sonido en nuestro espacio de trabajo 
-# con los que vamos a trabajar.
+\vspace{15pt}
 
+
+\ **wl** = longitud de la ventana para el análisis (número par de puntos)  (by default = 512).
+
+\ **ovlp** = permite la superposición entre dos ventanas sucesivas (en %).
+        
+\ **scale** = traza una escala de color de dB en el lado derecho del espectrograma
+        
+\ **cont** = sobreimprime las líneas de contorno en el espectrograma.
+
+\ **flim** = modificaciones de los límites del eje Y de la frecuencia (en kHz).
+
+\ **noisereduction** = Reducción de ruido en la imagen, no es un filtro de señal.
+
+\  **dB** = "max0" (por defecto) es el tipo de escala con la que vamos a trabajar. Si se establece en NULL, entonces se utiliza una escala lineal.
+        
+\  **flog** = Traza la frecuencia en una escala logarítmica.
+
+\  **grid** = rejilla.	
+
+\  **collevels** = conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
+
+\vspace{15pt}
+
+\newpage
+
+\vspace{15pt}
+
+Creamos un nuevo dataframe con los archivos de sonido que tenemos en nuestro espacio de trabajo, en este dataframe también estara incluida el nombre de la muestra de referencia que queremos comparar.
+
+\vspace{15pt}
+
+```{r nuevo dataframe, comment = TRUE}
 sel_tab_1 <- selection_table(whole.recs = TRUE)
+sel_tab_1
 ```
+\vspace{15pt}
+
+Combinamos el dataframe "**plantilla**" al dataframe anterior "**sel_tab_1**" en un nuevo dataframe llamado "**sel_tab**", al realizar esta operación de combinación entre los dataframes observamos que tenemos repetido el nombre que hemos elegido como referencia, con la particularidad de que la columna selec es diferente en uno y en el otro.
+
+\vspace{15pt}
+
+X_pitch-02.wav	selec = 2 y X_pitch-02.wav	selec = 1
+
+\vspace{15pt}
+
+Esto es debido a que en el inicio creamos el dataframe "**plantilla**" con una columna selec = 2 y ahora esta columna nos permite diferenciar entre los nombres iguales de las muestras. 
 
 
-```{r}
-# añadimos la plantilla inicial al dataframe anterior 
-# Nota:(Ahora tenemos el archivo de referencia repetido)
-
+```{r sel_tab sel_tab_1 + plantilla}
 sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
 
-# Establecemos la comparación de las muestras entre si:
+sel_tab
+```
+
+\newpage
+
+
+## Establecemos la comparación de las muestras:
+
+```{r}
+sel_tab$sound.files[1]
+```
+
+
+Seleccionamos el nombre de la muestra referencia
+```{r}
+sel_tab$selec[1] 
+```
+
+Junto con el select = 2
+
+```{r comparacion muestras}
 comp_matrix <- cbind(paste(sel_tab$sound.files[1],
                            sel_tab$selec[1], sep = "-"),
                      sel_tab$sound.files)
+
 ```
 
+Esta es la relación de muestras que será guardada en un nuevo dataframe llamado "comp_matrix", preparado para pasarlo a la función de correlación en el siguiente paso. 
 
-```{r}
+\newpage
+
+
+
+
+
+
+
+
+\vspace{15pt}
+
+
+## Funcion de correlación:
+
+En el procesamiento de señales, la correlación cruzada es una medida de similitud de dos series en función del desplazamiento de una con respecto a la otra. Esto también se conoce como un deslizante producto de punto o de desplazamiento interior-producto . Se usa comúnmente para buscar una señal larga para una característica conocida más corta. Tiene aplicaciones en reconocimiento de patrones, análisis de partículas individuales, tomografía electrónica, promediado, criptoanálisis y neurofisiología. 
+
+La correlación cruzada es de naturaleza similar a la convolución de dos funciones. En una autocorrelación, que es la correlación cruzada de una señal consigo misma, siempre habrá un pico en un retraso de cero, y su tamaño será la energía de la señal.
+
+<br /><a href='https://es.qaz.wiki/wiki/Cross-correlation'>Correlación cruzada</a><br />
+
+
+```{r La funcion de correlacion}
 xc_output <- xcorr(X = sel_tab,
            output = 'list',
            compare.matrix = comp_matrix,
            bp = c(low_freq, high_freq),
+           parallel = 4,
            na.rm = TRUE)
 ```
 
+Parámetros:
+
+\ X = sel_tab  datos que contiene columnas para archivos de sonido (sound.files), columna con número de selección (selec), tiempo de inicio y final de la señal.
+\ output = 'list': formato de salida. 
+\ compare.matrix = comp_matrix,
+\ bp = c(low_freq, high_freq),
+\ parallel = Numero de nucleos del procesador funcionando en paralelo.
+\ na.rm = todos aquellos NAs producidos cuando las correlaciones cruzadas por pares fallaron son eliminados de los resultados. Esto significa que todas las selecciones con al menos 1 correlación cruzada que fallaron son excluidas.
+
+### HASTA AQUI
+
+\vspace{15pt}
+
+\vspace{15pt}
 
 ```{r}
 matriz_principal <- data.frame(xc_output$scores$sound.files, 
@@ -485,6 +621,9 @@ xcor <- xcorr(X = sel_tab_1,
 
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 ```{r}
 # Ejecutar una matriz simétrica completa que contiene las disimilitudes 
@@ -492,6 +631,9 @@ xcor <- xcorr(X = sel_tab_1,
 Dissimilarity <- daisy(xcor)
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 ```{r}
 # Ejecutar el escalado multidimensional (CMS)
@@ -499,6 +641,9 @@ modelo <- cmdscale(Dissimilarity)
 
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 ```{r}
 # Calcular las distancias entre elementos
@@ -512,6 +657,9 @@ distancia <- dist(xcor, method = "euclidean")
 # 2) Visualizacion en diagrama de dispersion
 # 3) Visualizacion en grafo
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 ```{r }
 # 1) Visualizacion en diagrama de Boxplot entre las muestras
@@ -525,6 +673,9 @@ plot(xcor, type = "p", xlab = "Coord.1", ylab = "Coord.2")
 par(old.par)
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 
 ```{r}
@@ -532,7 +683,9 @@ par(old.par)
 valores <- cmdscale(distancia, eig = T)
 ```
 
+\vspace{15pt}
 
+\vspace{15pt}
 
 
 
@@ -547,7 +700,9 @@ valores$GOF
 ```
 
 
+\vspace{15pt}
 
+\vspace{15pt}
 
 
 
@@ -577,7 +732,9 @@ plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
 
 ```
 
+\vspace{15pt}
 
+\vspace{15pt}
 
 
 
@@ -744,16 +901,34 @@ Lista de requisitos de la discusión de tu TFG
 
 \vspace{15pt}
 
+
+
 Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol Evol. 8, 184-191.
+
+Maechler, M., Rousseeuw, P., Struyf, A., Hubert, M., Hornik, K.(2019).  cluster: Cluster Analysis Basics and Extensions. R package
+  version 2.1.0
   
 NOTE: please also cite the 'tuneR' and 'seewave' packages if you use any spectrogram-creating or acoustic-measuring function
   
 
 Uwe Ligges, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg (2018). tuneR: Analysis of Music and Speech. URL: https://CRAN.R-project.org/package=tuneR
+
+
+Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.30.
+
+  Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963
+
+  Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng,
+  editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
   
+
+Araya-Salas, M. (2018), *NatureSounds: a collection of animal sound for bioacoustic analysis in the R environment*. R package version
+  1.1.0.
 
 Sueur J, Aubin T, Simonis C (2008). seewave: a free modular tool for sound analysis and synthesis. Bioacoustics, 18: 213-226
 
+Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol
+  Evol. 8, 184-191.
 
   
 

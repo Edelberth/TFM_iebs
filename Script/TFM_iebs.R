@@ -183,7 +183,7 @@ plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
 
 
 
-
+citation("pkgname")
 
 
 
