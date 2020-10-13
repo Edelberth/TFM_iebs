@@ -1,10 +1,12 @@
 ---
 title: ''
 output: pdf_document
+author: "Alberto Jimenez"
+date: "27/8/2020"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE,  comment = NULL}
+knitr::opts_chunk$set(comment = NULL)
 ```
 
 [//]: <> (Primera pagina.) 
@@ -122,11 +124,11 @@ NOMBRE DEL PROYECTO:
 
 \vspace{30pt}
 
-Disponer de un método que nos permita la clasificación de un grupo de muestras de audio mediante el analisis de sus frecuencias. Analisis que posteriormente será visualizado en un espacio bidimensional y donde se podrá apreciar como de parecidas o diferentes son las muestras entre ellas.  
+Disponer de un método que nos permita la clasificación de un grupo de muestras de audio mediante el analisis de sus frecuencias. Analisis que posteriormente será visualizado en un espacio bidimensional donde se podrá observar como de parecidas o diferentes son esas muestras.  
 
 \vspace{6pt}
 
-A traves del barrido frecuencial entre una muestra de referencia y las demás muestras de sonido del conjunto, el resultado es procesado mediante ML método de escalamiento multidimensional basado en el aprendizaje no supervisado, englobado dentro del marco de la reducción de dimensionalidad.
+A traves del barrido frecuencial entre una muestra de referencia (referencia) y las demás muestras de sonido del conjunto, el resultado es procesado se obtiene a traves del método de escalamiento multidimensional basado en el aprendizaje no supervisado, englobado dentro del marco de la reducción de dimensionalidad.
 \vspace{80pt}
 
 ## Abstract
@@ -169,21 +171,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. In suscipit lectus sapi
 
 \vspace{30pt}
 
-En el ámbito audiovisual existe un perfil profesional que es el diseñador de sonido. Este es un profesional por lo general independiente que se dedica a la creación de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual en el que esté trabajando. 
+En el ámbito audiovisual existe un perfil profesional que es el diseñador de sonido, este es un profesional por lo general independiente y se dedica a la creación y el diseño de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual en el que esté trabajando. 
 
 \vspace{6pt}
 
-El resultado de esta labor es un trabajo metódico y artesanal donde el volumen de archivos de sonido que se genera para el desarrollo de un proyecto suele ser enorme, por lo que esto puede ocasionar una perdida de perspectiva tímbrica en el proceso creativo, pues a mayor volumen de muestras, es fácil que los sonidos acaben siendo parecidos y como consecuencia de ello la originalidad del trabajo verse mermada.
+El resultado de esta labor es un trabajo metódico y artesanal y el volumen de archivos de sonido que se genera para el desarrollo de un proyecto suele ser enorme, por lo que esto puede ocasionar una perdida de perspectiva tímbrica en el proceso creativo, ya que a mayor volumen de muestras, es fácil que los sonidos acaben siendo parecidos. La consecuencia de ello es la merma en la originalidad del trabajo.
 
 \vspace{6pt}
 
-Una herramienta que analice las muestras en las que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorrará tiempo a la hora de tomar decisiones de carácter creativo, pues permitirá establecer un punto de partida a partir de una muestra (la que quiera tomarse como referencia en el trabajo) y conocer cuál es el carácter de ese grupo de muestras.
+Una herramienta que analice las muestras en las que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorrará tiempo a la hora de tomar decisiones de carácter creativo, pues permitirá establecer un punto de partida a partir de una muestra (la que quiera tomarse como referencia en el trabajo) y conocer cuál es el carácter predominante a nivel frecuencial de ese grupo de muestras.
 
 \vspace{6pt}
 
-La solución propuesta para conseguir tal fin es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), referente al escalamiento multidimensional. 
+La solución propuesta es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), concretamente la referente al escalamiento multidimensional perteneciente al ámbito del aprendizaje no supervisado. 
 
-Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, es igualmente cierto que lo principalmente que se busca es la implementación del conocimiento adquirido en ML de la manera mas original posible evitando la dependencia de datasets externos a traves de un campo como es el audio en el que me siento cómodo y siendo honesto con lo aprendido. 
+La solución no es innovadora y tampoco pretende serlo, es igualmente cierto que lo principalmente se busca es la implementación del conocimiento adquirido en el apartado de ML en el Master de IEBS de la manera mas original posible, evitando realizar un trabajo con datasets externos mediante un campo como es el audio en el que me siento cómodo desde hace años y a la vez siendo lo más honesto posible con lo aprendido en el Master. 
 
 
 
@@ -209,7 +211,12 @@ Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, e
 
 \vspace{30pt}
 
-Fuentes que he utilizado como punto de partida y en las que inspirado el trabajo:
+Las fuentes que he utilizado como punto de partida y en las que inspirado el trabajo:
+
+
+\vspace{15pt}
+
+Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
 
 \vspace{15pt}
 
@@ -222,21 +229,18 @@ https://marce10.github.io/2020/06/15/Automatic_signal_detection-_a_case_study.ht
 
 Sononym. "navegador de muestras de audio", utilidad que permite la catalogación de las muestras de audio a traves del analisis de las muestras.
 
-No he podido encontrar los principios cientificos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada y por ese motivo no son publicos, sin embargo en la publicidad del producto que ofrecen el principio de funcionamiento hace referencia al análisis de las muestras de sonido mediante Machine Learning para hacer la categorización de las muestras.
+No encontré los principios cientificos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada, por ese motivo no son publicos. Sin embargo la publicidad del producto que ofrecen se puede entre ver el principio de funcionamiento que hace referencia al análisis de las muestras de sonido mediante Machine Learning para hacer la categorización de muestras.
 
 https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
-
 \vspace{15pt}
 
 
+https://medium.com/clasificaci%C3%B3n-de-m%C3%BAsica-a-trav%C3%A9s-del-an%C3%A1lisis-de/clasificaci%C3%B3n-de-m%C3%BAsica-a-trav%C3%A9s-del-an%C3%A1lisis-de-se%C3%B1ales-de-audio-1da23481b47c
+
+\vspace{45pt}
 
 
-\vspace{15pt}
-
-
-
-\vspace{15pt}
 
 
 
@@ -260,7 +264,7 @@ https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
 \vspace{30pt}
 
-Visualizar la relación frecuencial existente que hay entre los elementos de un conjunto de muestras de sonido.
+Visualizar la relación que hay entre los elementos de un conjunto de muestras y sus frecuencias.
 
 \vspace{12pt}
 
@@ -281,7 +285,7 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
     
     + 3.3 Calcular las distancias entre los elementos.
 
-4. Evaluación del modelo:
+4. Evaluar el modelo:
     + 4.1 Visualización en diagrama de Boxplot entre las muestras.
     
     + 4.2  Visualizacion en diagrama de dispersion.
@@ -306,42 +310,35 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 \newpage
 ## SOLUCIÓN PLANTEADA
 
-\vspace{30pt}
-
-
-La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo.
-
-Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
-
 \vspace{15pt}
 
+
+La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo. Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
+
+\vspace{15pt}
 
 
 \  Conjunto A: Muestras con distinta frecuencia, misma duración y con una componente armónica similar (escala musical).
 
 \  Conjunto B: Muestras con la misma frecuencia, misma duración y con una componente armónica diferente (armónicos).
 
-\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (outlayers del conjunto) pretenden ser los elementos disruptivos en el analisis del conjunto.
+\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (pretenden ser los outlayers del conjunto) elementos disruptivos en el analisis del conjunto.
 
 \vspace{15pt}
 
-1. Instrumentos
+## Elementos utilizados:
 
-Los instrumentos utilizados en la investigación han sido:
+\vspace{14pt}
 
-\vspace{15pt}
+Sintetizador Make Noise 0 Coast (No Coast) su nombre hace alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". 
 
-Hardware:
-
-Make Noise 0 Coast:
-
-Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia una u otra costa.
+La introducción de armónicos en la señal generada es el motivo principal en la elección de este sintetizador.
 
 <center>
-[![fig.1](/home/ion/TFM/0Coast.jpeg)](fig.1) 
-</center>
 
-El motivo por el que se elige la utilización de este sintetizador, es que permite la utilización de técnicas de síntesis empleadas en sistemas modulares que incluyenn la adición de sobretonos armónicos en la señal que hayamos generado.
+![0 Coast Makenoise](/home/ion/TFM/0Coast.jpeg)
+
+</center>
 
 
 http://www.makenoisemusic.com/synthesizers/ohcoast
@@ -350,180 +347,362 @@ https://www.soundonsound.com/reviews/make-noise-0-coast
 
 \vspace{15pt}
 
-Software:
-
 Audacity
 
 Aplicación informática multiplataforma libre, que se puede usar para grabación y edición de audio, distribuido bajo la licencia GPLv2+.
 
-
 https://es.wikipedia.org/wiki/Audacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \newpage
 
-2. Procedimiento
+## Procedimiento
 
-Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemplo de escalamiento multidimensional, para ello se hizo uso de warbleR, biblioteca de funciones de que tiene por objeto facilitar el análisis de la estructura de las señales acústicas de los animales en R. 
+\vspace{14pt}
 
+Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemplo de escalamiento multidimensional, para ello fué necesario el uso de warbleR, una biblioteca de funciones en R que tiene por objeto facilitar el análisis de la estructura de señales acústicas de animales. 
 
+\vspace{14pt}
 
-We have invested a lot of time and effort in creating R, please cite it when using it for
-data analysis. See also ‘citation("pkgname")’ for citing R packages.
 
 ``` {r INSTALAR LIBRERIAS}
-# INSTALAR LIBRERIAS
-#---------------------------------------------------------------------------------------
-library(cluster) # daisy
+library(cluster) # dadisy
 library(tuneR)
 library(knitr)
 library(NatureSounds)
 library(seewave)
 library(warbleR) 
-library(igraph) # 
+library(igraph) # hacer mencion al final no lo he hecho
 ```
 
-hacer uso de warbleR y de las librerias de las que depende, que tiene por objeto facilitar el análisis de la estructura de las señales acústicas de los animales en R, herramienta ideal para el analisis de  las muestras que necesitabamos hacerLos usuarios pueden recopilar grabaciones aviares de libre acceso o introducir sus propios datos en un flujo de trabajo que facilite la visualización espectrográfica y la medición de los parámetros acústicos. warbleR hace uso de las herramientas de análisis de sonido fundamentales del paquete de ondas marinas y ofrece nuevas herramientas para el análisis de la estructura acústica. Estas herramientas están disponibles para el análisis por lotes de señales acústicas.
 
+\newpage
 
-Una vez encontrada la manera de poder analizar las muestras de sonido , organizaron un seminario informativo con la dirección y el profesorado para explicarles los objetivos de la investigación y para obtener las autorizaciones de los padres (ya que era un estudio en el que participan menores de edad).
+\vspace{15pt}
+
+## 1. Tomar una muestra como referencia.
+
+Una vez que ya hemos cargado las bibliotecas de funciones (librerias) para analizar las muestras de sonido, creamos un data frame en el que crearemos las columnas a partir de la introducción del nombre de la muestra que queremos comparar, canal (uno o los dos) , inicio de muestra, final y "selec" = 2.  
+
 
 ```{r 01 Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla}
-# Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla:
-
 plantilla <- data.frame(sound.files = "X_pitch-02.wav",
-                        selec = 2, # Seleccionaremos la segunda muestra
+                        selec = 2,
                         channel = 1, 
                         start = 0,
-                        end = 0.2,
+                        end = 0.2952381,
                         stringsAsFactors = FALSE)
 ```
 
+\vspace{15pt}
 
+
+Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posición del dataframe "**plantilla**"
+
+El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
 
 ```{r 01 creamos un objeto wav mediante el dataframe plantilla }
-# creamos un objeto wav mediante el dataframe plantilla 
 wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
-
+wave
 ```
 
-```{r 02 limites establecidos en el filtro pasabanda}
-low_freq = 0                    # limites del filtro pasabanda (sin  limite) 
+\vspace{15pt}
+
+Establecemos que frecuencia (KHz) queremos visualizar en el eje Y del grafico. 
+
+```{r 02 limites de frecuencia en Y}
+low_freq = 0
 high_freq= 20
-
 ```
 
 
-```{r 03 Representación espectral de la muestra de referencia }
-# PLOT
-# muestra del analisis espectral de la muestra de referencia
+
+
+
+
+\newpage
+
+\vspace{15pt}
+
+Representación espectrográfica bidimensional de la señal de referencia en el tiempo:
+
+
+```{r PLOT  }
+
 spectro(wave,
-        wl = 512,
-        # zp = TRUE,
-        # ovlp = 30,
-        # scale = TRUE,
-        # osc = TRUE,
-        # #flim = c(low_freq, high_freq ),
-        # noisereduction = TRUE,
+        wl = 1024,
+        ovlp = 99,
+        scale = TRUE,
+        cont = TRUE,
+        flim = c(low_freq, high_freq ),
+        noisereduction = TRUE,
         # fastdisp = TRUE,
-        # dB = 'max0',
-        # flog = TRUE,
-        # grid = TRUE,
-        # collevels=seq(-115,0,10),
-        # fftw = TRUE,
-)
+        dB = 'max0',
+        flog = TRUE,
+        grid = TRUE,
+        collevels=seq(-115,0,10),
+        )
 ```
+\newpage
+
+Los parametros seleccionados para representar la señal han sido:
+
+\vspace{15pt}
+
+\ **wl**: Longitud de la ventana para el análisis (número par de puntos)
+
+\ **ovlp**: Permite la superposición entre dos ventanas sucesivas (en %).
+        
+\ **scale**: Traza una escala de color de dB en el lado derecho del espectrograma
+        
+\ **cont**: Sobreimprime las líneas de contorno en el espectrograma.
+
+\ **flim**: Modificaciones de los límites del eje Y de la frecuencia (en kHz).
+
+\ **noisereduction**: Reducción de ruido en la imagen, no es un filtro de señal.
+
+\  **dB**: Tipo de escala con la que vamos a trabajar, "max0" es el valor por defecto. Si se establece en NULL, entonces se utiliza una escala lineal.
+        
+\  **flog**: Traza la frecuencia en una escala logarítmica.
+
+\  **grid**: Rejilla.	
+
+\  **collevels**: Conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
 
 
-```{r}
-# Creación de un nuevo dataframe con todos los archivos de sonido en nuestro espacio de trabajo 
-# con los que vamos a trabajar.
+\vspace{15pt}
 
+Creamos un nuevo dataframe con los archivos de sonido que tenemos en nuestro espacio de trabajo, en este dataframe también estara incluida el nombre de la muestra de referencia que queremos comparar.
+
+```{r nuevo dataframe, comment = TRUE}
 sel_tab_1 <- selection_table(whole.recs = TRUE)
+sel_tab_1
 ```
+\vspace{15pt}
+
+Combinamos el dataframe "**plantilla**" al dataframe anterior "**sel_tab_1**" en un nuevo dataframe llamado "**sel_tab**", al realizar esta operación de combinación entre los dataframes observamos que tenemos repetido el nombre que hemos elegido como referencia, con la particularidad de que la columna selec es diferente en uno y en el otro.
+
+\vspace{15pt}
+
+X_pitch-02.wav	selec = 2 y X_pitch-02.wav	selec = 1
+
+\vspace{15pt}
+
+En el inicio creamos el dataframe "**plantilla**" con una columna selec de valor igual a dos, ahora esta columna nos permitirá diferenciar entre nombres iguales entre las muestras. 
 
 
-```{r}
-# añadimos la plantilla inicial al dataframe anterior 
-# Nota:(Ahora tenemos el archivo de referencia repetido)
-
+```{r sel_tab sel_tab_1 + plantilla}
 sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
 
-# Establecemos la comparación de las muestras entre si:
-comp_matrix <- cbind(paste(sel_tab$sound.files[1],
+sel_tab
+```
+
+
+
+
+## 2. Comparación de las muestras:
+
+Seleccionamos el nombre de la muestra referencia
+```{r}
+sel_tab$sound.files[1]
+```
+
+
+elegimos selec = 2
+```{r}
+sel_tab$selec[1] 
+```
+
+
+\newpage
+
+El resultado lo introducimos en un nuevo dataset llamado "**komp_matrix**".
+
+
+```{r comparacion muestras}
+komp_matrix <- cbind(paste(sel_tab$sound.files[1],
                            sel_tab$selec[1], sep = "-"),
                      sel_tab$sound.files)
 ```
 
 
-```{r}
-xc_output <- xcorr(X = sel_tab,
-           output = 'list',
-           compare.matrix = comp_matrix,
-           bp = c(low_freq, high_freq),
-           na.rm = TRUE)
-```
-
+Esta es la relación de muestras que será guardada en un nuevo dataframe llamado "**komp_matrix**", preparado para pasarlo a la función de correlación en el siguiente paso. 
 
 ```{r}
-matriz_principal <- data.frame(xc_output$scores$sound.files, 
-                               xc_output$scores$score) # conversion de matriz a df # sel_tab$sound.files
+komp_matrix
 ```
 
 
 
-```{r}
-# Esta es la matríz de correlación cruzada tiempo-frecuencia
-xcor <- xcorr(X = sel_tab_1,
+
+\vspace{15pt}
+
+
+## 3. Funcion de correlación:
+
+En el procesamiento de señales, la correlación cruzada es una medida de similitud de dos series que vá en función del desplazamiento de una con respecto a la otra. 
+
+Tiene aplicaciones en el reconocimiento de patrones, análisis de partículas individuales, tomografía electrónica, promediado, criptoanálisis y neurofisiología. 
+
+La correlación cruzada es de naturaleza similar a la convolución de dos funciones. En una autocorrelación, que es la correlación cruzada de una señal consigo misma, siempre habrá un pico en un retraso de cero, y su tamaño será la energía de la señal.
+
+\newpage
+
+
+```{r matríz de correlación cruzada tiempo-frecuencia}
+xcor <- xcorr(X = sel_tab,
               bp = c(low_freq, 
-                     high_freq), 
-              wl = 512,
+                     high_freq),
+              wl = 1024,
               ovlp = 99,
               path = NULL,
               type = "mfcc", 
+              parallel = 4,
               na.rm = TRUE)
-
 ```
 
 
-```{r}
-# Ejecutar una matriz simétrica completa que contiene las disimilitudes 
 
-Dissimilarity <- daisy(xcor)
+Parámetros:
+
+\ **X**: Datos que contienen columnas para archivos de sonido (sound.files), columna con número de selección (selec), tiempo de inicio y final de la señal.
+
+\ **bp**: Vector de datos donde se define la parte baja del filtro pasabajo y la parte alta. 
+
+\ **ovlp**: Vector numérico de longitud 1 que especifica el porcentaje de superposición entre dos ventanas consecutivas.
+
+\ **path**: Ruta
+
+\ **type**: Tipo de correlacion cruzada, en este caso se utiliza la correlación cruzada del coeficiente de Mel cepstral "mfcc" estos son las amplitudes del espectro resultante.
+
+\ ***parallel**: Nucleos del procesador funcionando en paralelo.
+
+\ ***na.rm**: Todos aquellos NAs (Not Available) creados cuando las correlaciones cruzadas por pares fallaron, se eliminan del resultado.
+
+\vspace{15pt}
+
+**Cepstrum de una señal:** Calculo de la transformada de Fourier inversa del espectro de la señal estudiada en escala logarítmica (dB). El cepstrum es de tipo complejo, por tanto, tiene parte real y parte imaginaria. La palabra "cepstrum" es un anagrama de la palabra Spectrum. Invierte el orden de las primeras cuatro letras, reforzando la idea de inversa del spectrum.
+
+**Escala Mel**: El nombre mel viene de la palabra melodía para indicar que se basa en la percepción humana de los tonos, una escala musical perceptual de tonos juzgados como intervalos equiespaciados por parte de observadores.
+
+
+**Cepstrum de Frecuencia Mel**: Es una representación del espectro de potencia a corto plazo de un sonido, basado en una transformada de coseno lineal de un espectro de potencia logarítmica en una escala de frecuencia mel no lineal. Las bandas de frecuencia están igualmente espaciadas en la escala Mel, lo que se aproxima más a la respuesta del sistema auditivo humano. Esta deformación de frecuencia puede permitir una mejor representación del sonido, por ejemplo, en la compresión de audio.
+
+
+\newpage
+
+## 4. Distancias
+
+Cálculo de las disimilitudes o de las distancias percibidas por pares entre las observaciones del conjunto de datos, esta es calculada utilizando medidas de disimilitud restringidas, que miden lo distintos que son dos ejemplos. De esta manera se trata mejorar el algoritmo original de los K vecinos más cercanos, y algunas de sus variantes. 
+
+```{r}
+dissimilarity <- daisy(xcor)
 ```
 
+\vspace{15pt}
 
+## 5. Escalamiento multidimensional (CMS)
+
+El escalamiento multidimensional toma un conjunto de disimilitudes y devuelve un conjunto de puntos tales que las distancias entre los puntos son aproximadamente iguales a las disimilitudes, a esto tambien se le conoce como "ordenación".
+
+Un conjunto de distancias euclidianas en "n" puntos puede representarse exactamente en como máximo "n - 1" dimensiones. La escala cmds sigue el análisis de Mardia, y devuelve la representación dimensional k más adecuada, donde k puede ser menor que el argumento k.
+
+La representación sólo se determina hasta la ubicación, las rotaciones y las reflexiones. 
 ```{r}
-# Ejecutar el escalado multidimensional (CMS)
-modelo <- cmdscale(Dissimilarity)
-
+modelo <- cmdscale(dissimilarity)
+modelo
 ```
 
+\newpage
 
+\vspace{15pt}
+
+## 6. Distancias entre elementos
+
+Esta función calcula y devuelve la matriz de distancia calculada utilizando la medida de distancia especificada para calcular las distancias entre las filas de una matriz de datos.
 ```{r}
-# Calcular las distancias entre elementos
 distancia <- dist(xcor, method = "euclidean")
-```
+``` 
+
+Distancia Euclidea:$$\sqrt[]{sum_{i=1}^{n}(p_i - p_q)^2}$$ 
 
 
-# EVALUACION EL MODELO
-#-------------------------------------------------------------------------------------
-# 1) Visualizacion en diagrama de Boxplot entre las muestras
-# 2) Visualizacion en diagrama de dispersion
+sobre $$\mathbb{R}$$
+
+
+## 7. Visualizacion
+
+# 1) Diagrama de Boxplot entre las muestras
+
+# 2) Diagrama de dispersion
+
 # 3) Visualizacion en grafo
 
 
-```{r }
-# 1) Visualizacion en diagrama de Boxplot entre las muestras
-#-------------------------------------------------------------------------------------
+\vspace{15pt}
+
+El resultado entregado por la función de correlación es un objeto lista, hemos de acceder a los datos y crear un nuevo dataframe. 
+
+## Visualizacion en diagrama de Boxplot entre las muestras
+
+## conversion de matriz a df # sel_tab$sound.files
+
+Limpiamos el buffer 
+```{r}
 graphics.off()
+```
+
+
+Juntamos dos 
+```{r }
 old.par <- par(mfrow=c(1, 2))
-plot(matriz_principal, type = "d", xlab = "Coord.1", ylab = "Coord.2")
-#text(matriz_principal[,1], matriz_principal[,2], labels = rownames(matriz_principal)) 
-plot(xcor, type = "p", xlab = "Coord.1", ylab = "Coord.2")
-#text(xcor[,1], xcor[,2], labels = rownames(xcor)) 
+plot(xcor, type = "b", xlab = "Simililltud Frecuencial", ylab = "Cantidad armónica")
+text(xcor[,1],xcor[,2], labels = rownames(xcor), cex = 0.8 )
+
+plot(xcor, type = "h", xlab = "Frecuencia", ylab = "Cantidad armónica")
+text(xcor[,1],xcor[,2], labels = rownames(xcor), cex = 0.8 )
+
 par(old.par)
 ```
+
+
+En la parte inferior de las gráficas se observa una sucesión de puntos que corresponden a muestras con frecuencias cada vez mas altas, estas van evolucionando a lo largo del tiempo de manera constante hasta que llega un punto en el que aun avanzando van perdiendo presencia en el eje "Y", esto es así porque conforme va aumentando la frecuencia en las muestras tambien vamos perdiendo compoponente armónica y por ese motivo y porque las muestras no evolucionan de manera lineal. 
+
+De  igual manera se puede observar la existencia de dos muestras que no siguen la tendencia predominante del grupo comentado con anterioridad y que a modo de "outlayers" indican que su tono frecuencia principal está entre las muestras 4 y 5 además de tener una componente tímbrica diferente.
+
+
+\vspace{15pt}
+
 
 
 
@@ -531,6 +710,8 @@ par(old.par)
 # Las dos primeras coordenadas principales (valores propios) son:
 valores <- cmdscale(distancia, eig = T)
 ```
+
+\vspace{15pt}
 
 
 
@@ -546,6 +727,47 @@ valores$eig
 valores$GOF
 ```
 
+\vspace{15pt}
+
+
+
+
+
+
+```{r}
+# Definir un grafo de tamaño 5 para poder incluir todos los elementos
+#grafico <- graph.tree(ncol(xcor),mode = c("undirected"))
+
+grafico <- graph.full(nrow(xcor))
+```
+
+
+
+
+
+
+
+```{r}
+
+# Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
+#colnames(xcor)
+V(grafico)$label <- colnames(xcor)
+
+layout <- layout.mds(grafico, dist = as.matrix(distancia))
+
+graphics.off()
+
+plot(grafico, pch = 19, col = rgb(0, 0, 0, 0.15))
+
+plot(grafico, col = rep(1:3, each = 10), pch = 19)
+legend("bottomright", legend = paste("Group", 1:3), col = 1:3, pch = 19, bty = "n")
+
+plot(grafico, type ="p", layout = layout, vertex.size = 1)
+
+
+```
+
+\vspace{15pt}
 
 
 
@@ -560,21 +782,11 @@ valores$GOF
 
 
 ```{r}
-# Definir un grafo de tamaño 5 para poder incluir todos los elementos
-grafala <- graph.tree(ncol(xcor),mode = c("out"))
-
-
-# Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
-#colnames(xcor)
-V(grafala)$label <- colnames(xcor)
-
-layout <- layout.mds(grafala, dist = as.matrix(distancia))
-
-graphics.off()
-
-#plot(grafala, vertex.size = .1)
-plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
-
+set.seed(19)
+x <- rnorm(30)
+y <- rnorm(30)
+plot(x, y, col = rep(1:3, each = 10), pch = 19)
+#legend("bottomright", legend = paste("Group", 1:3), col = 1:3, pch = 19, bty = "n")
 ```
 
 
@@ -584,6 +796,14 @@ plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
 
 
 
+
+# xPERIMete
+
+
+
+\newpage
+ 
+ 
 Por último, explican que la investigación consistió en la aplicación de los instrumentos (o sea, los cuestionarios) de forma individual y anónima, durante el horario escolar.
 
 4. Análisis estadístico (o análisis de datos)
@@ -744,16 +964,34 @@ Lista de requisitos de la discusión de tu TFG
 
 \vspace{15pt}
 
+
+
 Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol Evol. 8, 184-191.
+
+Maechler, M., Rousseeuw, P., Struyf, A., Hubert, M., Hornik, K.(2019).  cluster: Cluster Analysis Basics and Extensions. R package
+  version 2.1.0
   
 NOTE: please also cite the 'tuneR' and 'seewave' packages if you use any spectrogram-creating or acoustic-measuring function
   
 
 Uwe Ligges, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg (2018). tuneR: Analysis of Music and Speech. URL: https://CRAN.R-project.org/package=tuneR
+
+
+Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.30.
+
+  Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963
+
+  Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng,
+  editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
   
+
+Araya-Salas, M. (2018), *NatureSounds: a collection of animal sound for bioacoustic analysis in the R environment*. R package version
+  1.1.0.
 
 Sueur J, Aubin T, Simonis C (2008). seewave: a free modular tool for sound analysis and synthesis. Bioacoustics, 18: 213-226
 
+Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol
+  Evol. 8, 184-191.
 
   
 
