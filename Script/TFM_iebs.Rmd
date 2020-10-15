@@ -386,7 +386,7 @@ https://es.wikipedia.org/wiki/Audacity
 
 \newpage
 
-## Procedimiento
+# Procedimiento
 
 \vspace{14pt}
 
@@ -432,22 +432,46 @@ Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posici�
 El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
 
 ```{r 01 creamos un objeto wav mediante el dataframe plantilla }
-wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
-wave
+wave_referencia <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
+wave_referencia
 ```
 
 \vspace{15pt}
 
 Establecemos que frecuencia (KHz) queremos visualizar en el eje Y del grafico. 
 
-```{r 02 limites de frecuencia en Y}
-low_freq = 0
-high_freq= 20
+```{r 02 Frequency peak detection limite de frecuencia en Y para visulización}
+
+
+
+pico_freq_max <- fpeaks(spec(wave_referencia,dB = "max0" ),nmax = 1,threshold = 0.5)
+
+por_10 = 10
+low_f = 0
+high_f <- (pico_freq_max[c(1,0)])*por_10
+
+res_wave_referencia <- autoc(wave_referencia, threshold=0.01, plot=FALSE)
+
+spectro(wave_referencia,
+        wl = 1024,
+        #ovlp = 99,
+        scale = TRUE,
+        cont = TRUE,
+        flim = c(low_f, high_f),
+        noisereduction = TRUE,
+        # fastdisp = TRUE,
+        dB = 'max0',
+        #flog = TRUE,
+        grid = TRUE,
+        palette = spectro.colors,
+)
+
+points(res_wave_referencia, pch=25)
+legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
+
+  
+
 ```
-
-
-
-
 
 
 \newpage
@@ -457,21 +481,27 @@ high_freq= 20
 Representación espectrográfica bidimensional de la señal de referencia en el tiempo:
 
 
-```{r PLOT  }
+```{r PLOT autocorrelation of a time wave }
 
-spectro(wave,
+res_wave_referencia <- autoc(wave_referencia, threshold=0.01, plot=FALSE)
+
+spectro(wave_referencia,
         wl = 1024,
-        ovlp = 99,
+        #ovlp = 99,
         scale = TRUE,
         cont = TRUE,
-        flim = c(low_freq, high_freq ),
+        flim = c(low_f, high_f),
         noisereduction = TRUE,
         # fastdisp = TRUE,
         dB = 'max0',
-        flog = TRUE,
+        #flog = TRUE,
         grid = TRUE,
-        collevels=seq(-115,0,10),
-        )
+        palette = spectro.colors,
+)
+
+points(res_wave_referencia, pch=25)
+legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
+
 ```
 \newpage
 
@@ -580,9 +610,10 @@ La correlación cruzada es de naturaleza similar a la convolución de dos funcio
 
 
 ```{r matríz de correlación cruzada tiempo-frecuencia}
-xcor <- xcorr(X = sel_tab,
-              bp = c(low_freq, 
-                     high_freq),
+
+xcor <- xcorr(sel_tab,
+              bp = c(low_f, 
+                     high_f),
               wl = 1024,
               ovlp = 99,
               path = NULL,

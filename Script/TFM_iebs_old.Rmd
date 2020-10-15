@@ -1,0 +1,932 @@
+---
+title: ''
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+```
+
+
+[//]: <> (Primera pagina.) 
+
+[![image](/home/ion/TFM/logo_iebs.png)]()
+
+\vspace{62pt}
+
+
+\begin{center} 
+
+TITULO DEL TRABAJO DE FINAL DE MASTER
+
+\end{center}
+
+
+\vspace{68pt}
+
+ALUMNO:
+
+\vspace{6pt}
+
+Alberto Jiménez Rodríguez
+
+\vspace{80pt}
+
+PROGRAMA: 
+
+MASTER EN  BUSSINESS INTELLIGENCE AND DATA SCIENCE
+
+\vspace{96pt}
+
+NOMBRE DEL PROYECTO:	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+[//]: <> (2 pagina.) 
+
+# CONTENIDO 
+
+\vspace{60pt}
+
+1. [RESUMEN...............................................................3](#resumen)
+\vspace{12pt}
+
+2. [INTRODUCCIÓN........................................................4](#introducción)
+\vspace{12pt}
+
+3. [ESTADO DEL ARTE....................................................5](#estado-del-arte)
+\vspace{12pt}
+
+4. [OBJETIVOS............................................................6](#objetivos)
+\vspace{12pt}
+
+5. [SOLUCIÓN PLANTEADA..............................................7](#solución-planteada)
+\vspace{12pt}
+
+6. [EVALUACIÓN...........................................................10](#evaluación)
+\vspace{12pt}
+
+7. [RESULTADOS...........................................................11](#resultados)
+\vspace{12pt}
+
+8. [CONCLUSIONES Y TRABAJOS FUTUROS.............................12](#conclusiones-y-trabajos-futuros)
+\vspace{12pt}
+
+9. [REFERENCIAS..........................................................14](#referencias)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+## RESUMEN
+
+\vspace{30pt}
+
+Disponer de un método que nos permita la clasificación de un grupo de muestras de audio mediante el analisis de sus frecuencias. Analisis que posteriormente será visualizado en un espacio bidimensional y donde se podrá apreciar como de parecidas o diferentes son las muestras entre ellas.  
+
+\vspace{6pt}
+
+A traves del barrido frecuencial entre una muestra de referencia y las demás muestras de sonido del conjunto, el resultado es procesado mediante ML método de escalamiento multidimensional basado en el aprendizaje no supervisado, englobado dentro del marco de la reducción de dimensionalidad.
+\vspace{80pt}
+
+## Abstract
+
+\vspace{30pt}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In suscipit lectus sapien, ut ultricies sem hendrerit vel. Phasellus sit amet lorem dictum, egestas nunc id, dignissim ipsum. Etiam dictum sapien vitae scelerisque elementum. Aenean eleifend eleifend mauris non facilisis. Nulla nec ex aliquam, sollicitudin enim ac, semper magna. Phasellus nec nisi metus. Vivamus vehicula dui sit amet sapien malesuada semper. Fusce sit amet metus a metus suscipit egestas. Vivamus metus enim, euismod in nunc a, lobortis gravida sapien. Cras efficitur facilisis elementum. Etiam ac molestie nisi. Suspendisse ut arcu a sem vestibulum aliquam nec nec ligula. Aenean at augue sit amet tellus semper ullamcorper. Proin consectetur dolor et lectus porta, vel sollicitudin justo consectetur. Curabitur pretium libero sit amet ex ultricies, id ultricies magna accumsan. Fusce in auctor sem.
+
+\vspace{6pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+## INTRODUCCIÓN
+
+\vspace{30pt}
+
+En el ámbito audiovisual existe un perfil profesional que es el diseñador de sonido. Este es un profesional por lo general independiente que se dedica a la creación de efectos sonoros con el objetivo de narrar, personificar, generar emociones, retratar espacios sonoros, épocas, y en definitiva crear un universo sonoro con una identidad particular dentro del contexto audiovisual en el que esté trabajando. 
+
+\vspace{6pt}
+
+El resultado de esta labor es un trabajo metódico y artesanal donde el volumen de archivos de sonido que se genera para el desarrollo de un proyecto suele ser enorme, por lo que esto puede ocasionar una perdida de perspectiva tímbrica en el proceso creativo, pues a mayor volumen de muestras, es fácil que los sonidos acaben siendo parecidos y como consecuencia de ello la originalidad del trabajo verse mermada.
+
+\vspace{6pt}
+
+Una herramienta que analice las muestras en las que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorrará tiempo a la hora de tomar decisiones de carácter creativo, pues permitirá establecer un punto de partida a partir de una muestra (la que quiera tomarse como referencia en el trabajo) y conocer cuál es el carácter de ese grupo de muestras.
+
+\vspace{6pt}
+
+La solución propuesta para conseguir tal fin es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), referente al escalamiento multidimensional. 
+
+Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, es igualmente cierto que lo principalmente que se busca es la implementación del conocimiento adquirido en ML de la manera mas original posible evitando la dependencia de datasets externos a traves de un campo como es el audio en el que me siento cómodo y siendo honesto con lo aprendido. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+## ESTADO DEL ARTE
+
+\vspace{30pt}
+
+Fuentes que he utilizado como punto de partida y en las que inspirado el trabajo:
+
+
+\vspace{15pt}
+
+Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
+
+\vspace{15pt}
+
+Caso de estudio en la investigación de los murciélagos con alas de disco de Spix (Thyroptera tricolor), biblioteca de funciones llamada warbleR.
+
+https://marce10.github.io/2020/06/15/Automatic_signal_detection-_a_case_study.html
+
+
+\vspace{15pt}
+
+Sononym. "navegador de muestras de audio", utilidad que permite la catalogación de las muestras de audio a traves del analisis de las muestras.
+
+No he podido encontrar los principios cientificos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada y por ese motivo no son publicos, sin embargo en la publicidad del producto que ofrecen el principio de funcionamiento hace referencia al análisis de las muestras de sonido mediante Machine Learning para hacer la categorización de las muestras.
+
+https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
+
+
+\vspace{45pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+## OBJETIVOS
+
+\vspace{30pt}
+
+Visualizar la relación existente que hay entre los elementos de un conjunto de muestras de sonido y sus frecuencias.
+
+\vspace{12pt}
+
+La estrategia para conseguirlo será a traves de los siguientes puntos:
+
+\vspace{12pt}
+
+1. Tomar una muestra como referencia y analizar el contenido frecuencial.
+
+
+2. Comparar las demás muestras con el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia. 
+
+
+3. Definir el modelo:
+    + 3.1 Convertir la matriz de correlación en una matriz de disimilud.
+    
+    + 3.2 Ejecutar un escalado multidimensional.
+    
+    + 3.3 Calcular las distancias entre los elementos.
+
+4. Evaluar el modelo:
+    + 4.1 Visualización en diagrama de Boxplot entre las muestras.
+    
+    + 4.2  Visualizacion en diagrama de dispersion.
+    
+    + 4.3 Visualizacion en un sistema de coordenadas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+## SOLUCIÓN PLANTEADA
+
+\vspace{15pt}
+
+
+La metodología utilizada se basará en el uso de unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo. Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
+
+\vspace{15pt}
+
+
+\  Conjunto A: Muestras con distinta frecuencia, misma duración y con una componente armónica similar (escala musical).
+
+\  Conjunto B: Muestras con la misma frecuencia, misma duración y con una componente armónica diferente (armónicos).
+
+\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (pretenden ser los outlayers del conjunto) elementos disruptivos en el analisis del conjunto.
+
+\vspace{15pt}
+
+## 1. Elementos utilizados:
+
+\vspace{14pt}
+
+Make Noise 0 Coast:
+
+Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". La adición de armónicos en la señal que generada es el motivo principal de uso de este sintetizador.
+
+<center>
+
+![0 Coast Makenoise](/home/ion/TFM/0Coast.jpeg)
+
+</center>
+
+
+http://www.makenoisemusic.com/synthesizers/ohcoast
+
+https://www.soundonsound.com/reviews/make-noise-0-coast
+
+\vspace{15pt}
+
+Audacity
+
+Aplicación informática multiplataforma libre, que se puede usar para grabación y edición de audio, distribuido bajo la licencia GPLv2+.
+
+https://es.wikipedia.org/wiki/Audacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+## 2. Procedimiento
+
+\vspace{14pt}
+
+Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemplo de escalamiento multidimensional, para ello fué necesario el uso de warbleR, una biblioteca de funciones en R que tiene por objeto facilitar el análisis de la estructura de señales acústicas de animales. 
+
+\vspace{14pt}
+
+
+``` {r INSTALAR LIBRERIAS}
+# INSTALAR LIBRERIAS
+#---------------------------------------------------------------------------------------
+library(cluster) # dadisy
+library(tuneR)
+library(knitr)
+library(NatureSounds)
+library(seewave)
+library(warbleR) 
+library(igraph) # hacer mencion al final no lo he hecho
+```
+
+
+\newpage
+
+\vspace{15pt}
+
+Una vez que ya hemos cargado las bibliotecas de funciones (librerias) para analizar las muestras de sonido, creamos un data frame en el que crearemos las columnas a partir de la introducción del nombre de la muestra que queremos comparar, canal (uno o los dos) , inicio de muestra, final y "selec" = 2.  
+
+\vspace{14pt}
+
+
+```{r 01 Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla}
+# Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla:
+plantilla <- data.frame(sound.files = "X_pitch-02.wav",
+                        selec = 2, # Seleccionaremos la segunda muestra
+                        channel = 1, 
+                        start = 0,
+                        end = 0.2952381,
+                        stringsAsFactors = FALSE)
+```
+
+\vspace{15pt}
+
+Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posición del dataframe "**plantilla**"
+
+El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
+
+\vspace{15pt}
+
+```{r 01 creamos un objeto wav mediante el dataframe plantilla }
+# creamos un objeto wav  
+wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
+wave
+```
+
+Establecemos que frecuencia (KHz) queremos visualizar en el eje Y del grafico. 
+
+\vspace{15pt}
+```{r 02 limites de frecuencia en Y}
+low_freq = 0
+high_freq= 20
+```
+
+
+\newpage
+
+\vspace{15pt}
+
+Representación espectrográfica bidimensional de la señal de referencia a lo largo del tiempo:
+
+
+```{r PLOT  }
+# spectro(wave,
+#         wl = 1024,
+#         ovlp = 99,
+#         scale = TRUE,
+#         cont = TRUE,
+#         flim = c(low_freq, high_freq ),
+#         noisereduction = TRUE,
+#         # fastdisp = TRUE,
+#         dB = 'max0',
+#         flog = TRUE,
+#         grid = TRUE,
+#         collevels=seq(-115,0,10),
+#         )
+```
+
+Los parametros elegidos para representar la señal han sido:
+
+\vspace{15pt}
+
+
+\ **wl** = longitud de la ventana para el análisis (número par de puntos)  (by default = 512).
+
+\ **ovlp** = permite la superposición entre dos ventanas sucesivas (en %).
+        
+\ **scale** = traza una escala de color de dB en el lado derecho del espectrograma
+        
+\ **cont** = sobreimprime las líneas de contorno en el espectrograma.
+
+\ **flim** = modificaciones de los límites del eje Y de la frecuencia (en kHz).
+
+\ **noisereduction** = Reducción de ruido en la imagen, no es un filtro de señal.
+
+\  **dB** = "max0" (por defecto) es el tipo de escala con la que vamos a trabajar. Si se establece en NULL, entonces se utiliza una escala lineal.
+        
+\  **flog** = Traza la frecuencia en una escala logarítmica.
+
+\  **grid** = rejilla.	
+
+\  **collevels** = conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
+
+\vspace{15pt}
+
+\newpage
+
+\vspace{15pt}
+
+Creamos un nuevo dataframe con los archivos de sonido que tenemos en nuestro espacio de trabajo, en este dataframe también estara incluida el nombre de la muestra de referencia que queremos comparar.
+
+\vspace{15pt}
+
+```{r nuevo dataframe, comment = TRUE}
+sel_tab_1 <- selection_table(whole.recs = TRUE)
+sel_tab_1
+```
+\vspace{15pt}
+
+Combinamos el dataframe "**plantilla**" al dataframe anterior "**sel_tab_1**" en un nuevo dataframe llamado "**sel_tab**", al realizar esta operación de combinación entre los dataframes observamos que tenemos repetido el nombre que hemos elegido como referencia, con la particularidad de que la columna selec es diferente en uno y en el otro.
+
+\vspace{15pt}
+
+X_pitch-02.wav	selec = 2 y X_pitch-02.wav	selec = 1
+
+\vspace{15pt}
+
+Esto es debido a que en el inicio creamos el dataframe "**plantilla**" con una columna selec = 2 y ahora esta columna nos permite diferenciar entre los nombres iguales de las muestras. 
+
+
+```{r sel_tab sel_tab_1 + plantilla}
+sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
+sel_tab
+```
+
+\newpage
+
+
+## Establecemos la comparación de las muestras:
+
+```{r}
+sel_tab$sound.files[1]
+```
+
+
+Seleccionamos el nombre de la muestra referencia
+```{r}
+sel_tab$selec[1] 
+```
+
+Junto con el select = 2
+
+```{r comparacion muestras}
+comp_matrix <- cbind(paste(sel_tab$sound.files[1],
+                           sel_tab$selec[1], sep = "-"),
+                     sel_tab$sound.files)
+```
+
+Esta es la relación de muestras que será guardada en un nuevo dataframe llamado "comp_matrix", preparado para pasarlo a la función de correlación en el siguiente paso. 
+
+\newpage
+
+
+
+
+
+
+
+
+\vspace{15pt}
+
+
+## Funcion de correlación:
+
+En el procesamiento de señales, la correlación cruzada es una medida de similitud de dos series en función del desplazamiento de una con respecto a la otra. Esto también se conoce como un deslizante producto de punto o de desplazamiento interior-producto . Se usa comúnmente para buscar una señal larga para una característica conocida más corta. Tiene aplicaciones en reconocimiento de patrones, análisis de partículas individuales, tomografía electrónica, promediado, criptoanálisis y neurofisiología. 
+
+La correlación cruzada es de naturaleza similar a la convolución de dos funciones. En una autocorrelación, que es la correlación cruzada de una señal consigo misma, siempre habrá un pico en un retraso de cero, y su tamaño será la energía de la señal.
+
+<br /><a href='https://es.qaz.wiki/wiki/Cross-correlation'>Correlación cruzada</a><br />
+
+
+```{r La funcion de correlacion}
+xc_output <- xcorr(X = sel_tab,
+           output = 'list',
+           compare.matrix = comp_matrix,
+           bp = c(low_freq, high_freq),
+           parallel = 4,
+           na.rm = TRUE)
+```
+
+Parámetros:
+
+\ X = sel_tab  datos que contiene columnas para archivos de sonido (sound.files), columna con número de selección (selec), tiempo de inicio y final de la señal.
+\ output = 'list': formato de salida. 
+\ compare.matrix = comp_matrix,
+\ bp = c(low_freq, high_freq),
+\ parallel = Numero de nucleos del procesador funcionando en paralelo.
+\ na.rm = todos aquellos NAs producidos cuando las correlaciones cruzadas por pares fallaron son eliminados de los resultados. Esto significa que todas las selecciones con al menos 1 correlación cruzada que fallaron son excluidas.
+
+### HASTA AQUI
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+```{r}
+matriz_principal <- data.frame(xc_output$scores$sound.files, 
+                               xc_output$scores$score) # conversion de matriz a df # sel_tab$sound.files
+```
+
+
+
+```{r}
+# Esta es la matríz de correlación cruzada tiempo-frecuencia
+xcor <- xcorr(X = sel_tab_1,
+              bp = c(low_freq, 
+                     high_freq), 
+              wl = 512,
+              ovlp = 99,
+              path = NULL,
+              type = "mfcc", 
+              na.rm = TRUE)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+```{r}
+# Ejecutar una matriz simétrica completa que contiene las disimilitudes 
+Dissimilarity <- daisy(xcor)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+```{r}
+# Ejecutar el escalado multidimensional (CMS)
+modelo <- cmdscale(Dissimilarity)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+```{r}
+# Calcular las distancias entre elementos
+distancia <- dist(xcor, method = "euclidean")
+```
+
+
+# EVALUACION EL MODELO
+#-------------------------------------------------------------------------------------
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+# 2) Visualizacion en diagrama de dispersion
+# 3) Visualizacion en grafo
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+```{r }
+# 1) Visualizacion en diagrama de Boxplot entre las muestras
+#-------------------------------------------------------------------------------------
+graphics.off()
+old.par <- par(mfrow=c(1, 2))
+plot(matriz_principal, type = "d", xlab = "Coord.1", ylab = "Coord.2")
+#text(matriz_principal[,1], matriz_principal[,2], labels = rownames(matriz_principal)) 
+plot(xcor, type = "p", xlab = "Coord.1", ylab = "Coord.2")
+#text(xcor[,1], xcor[,2], labels = rownames(xcor)) 
+par(old.par)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+
+```{r}
+# Las dos primeras coordenadas principales (valores propios) son:
+valores <- cmdscale(distancia, eig = T)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+
+
+
+
+```{r}
+#Valores propios calculados
+valores$eig
+# Determinar el ajuste
+valores$GOF
+```
+
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# Definir un grafo de tamaño 5 para poder incluir todos los elementos
+grafala <- graph.tree(ncol(xcor),mode = c("out"))
+# Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
+#colnames(xcor)
+V(grafala)$label <- colnames(xcor)
+layout <- layout.mds(grafala, dist = as.matrix(distancia))
+graphics.off()
+#plot(grafala, vertex.size = .1)
+plot(grafala, type ="b", layout = layout, vertex.size = 0.5)
+```
+
+\vspace{15pt}
+
+\vspace{15pt}
+
+
+
+
+
+
+Por último, explican que la investigación consistió en la aplicación de los instrumentos (o sea, los cuestionarios) de forma individual y anónima, durante el horario escolar.
+
+4. Análisis estadístico (o análisis de datos)
+Aquí se describe cómo has analizado los datos, qué programa o qué métodos estadísticos has empleado.
+
+Ya que el tema del análisis estadístico es un mundo aparte para mí, directamente te remito al artículo de nuestro ejemplo. Allí verás cómo lo hacen sus autores.
+
+
+
+
+En esta sección el estudiante debe describir la solución planteada, comenzando por la metodología (pasos que siguió) de desarrollo. Posteriormente la descripción del desarrollo de cada etapa seguida. 
+La metodología que debe utilizar el estudiante de master debe estar validada por la comunidad científica y el estudiante debe justificarlo.
+    1. METODOLOGÍA
+        ◦ Etapa 1
+        ◦ Etapa 2
+        ◦ Etapa 3
+        ◦ Etapa 4
+        ◦ Etapa 5
+    2. DESARROLLO DE CADA ETAPA
+Extensión máxima: 30 páginas.
+
+
+
+
+
+
+
+
+\newpage
+## EVALUACIÓN
+
+\newpage
+## RESULTADOS
+
+
+En este capítulo, pones en práctica la metodología de la investigación que has descrito en el capítulo anterior. Por lo tanto, aquí aplicas los métodos específicos. Describes cómo se desenvolvió la investigación y analizas los resultados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+## CONCLUSIONES Y TRABAJOS FUTUROS
+
+Tu TFG, TFM o tesis debe terminar con unas conclusiones y una discusión. Estas son dos partes o secciones diferentes, pero a veces es difícil separarlas. Este artículo trata sobre estas dos partes y la información que, como mínimo, debe contener cada parte.
+
+Conclusiones TFG: ¿Qué aspecto tienen?
+El propósito de las conclusiones de un TFG es dar respuesta a tu pregunta de investigación. Para empezar, repite la pregunta de investigación. Sin embargo, no te limites a reiterar dicha pregunta, sino que debes integrar una explicación de la misma en el resto de la discusión de la sección.
+
+A continuación, expón las conclusiones que has extraído de los resultados de tu investigación (utiliza los resultados clave que sean más relevantes para responder a tu pregunta de investigación).
+
+Por último, responde a la pregunta principal y explica cómo has llegado a esta conclusión. No te limites a incluir la pregunta con la respuesta a continuación, explícala cuidadosamente e intégrala en el resto del texto. Indica solo las observaciones, sin hacer interpretaciones.
+
+Ejemplo 1: Proporciona observaciones
+Observación: Diez encuestados estuvieron de acuerdo con la afirmación de que los elefantes son animales maravillosos y seis disintieron. Por tanto, la mayoría estuvo de acuerdo.
+
+Interpretación: Diez encuestados estuvieron de acuerdo con la afirmación de que los elefantes son animales maravillosos y seis disintieron. Esto demuestra que a diez personas les impresionó mucho el carácter del animal y que seis personas odiaban a los elefantes.
+
+En términos de tiempos verbales, en las conclusiones de tu TFG se utiliza el presente al presentar hechos, y el pretérito o pretérito perfecto al hacer referencia a la investigación que has realizado.
+
+Ejemplo 2: Tiempos verbales en las conclusiones de tu TFG
+Hechos en presente: La compañía X actualmente no tiene una visión y misión claras. La compañía tampoco hace (está haciendo) buen uso de los medios sociales para vender sus productos.
+
+Tu investigación en pretérito: Esta investigación examinó si la Compañía X tiene una visión y misión claras […] Los resultados mostraron que la Compañía X … […] El investigador también analizó cuándo …
+
+Tu investigación en pretérito perfecto: Esta investigación ha examinado si la Compañía X tiene una visión y misión claras […] Los resultados han mostrado que la Compañía X … […] El investigador también ha analizado cuándo …
+
+La extensión de las conclusiones de tu TFG debe ser de entre 200 y 400 palabras. Presta atención:
+
+¿Has usado una hipótesis en vez de una pregunta de investigación? En ese caso, indica si la hipótesis se ha demostrado cierta.
+No incluyas información nueva en las conclusiones de tu TFG. Cualquier información nueva debe presentarse antes en el TFG.
+No des ejemplos en tus conclusiones, ya que ya deberías haber elaborado las conclusiones de tu TFG (con ejemplos) en el resto de tu investigación. Por ejemplo, si concluyes que la crisis financiera ha afectado negativamente a los ingresos de los bancos, entonces no has de mencionar también que el Banco XYZ ha tenido, «por ejemplo», un 20% menos de ingresos en 2009 que en 2007.
+Lista de requisitos de las conclusiones de tu TFG
+	Se han contestado las preguntas de investigación.
+	Se ha respondido a la pregunta principal o la exposición del problema.
+	Se han confirmado o refutado las hipótesis.
+	Se ha utilizado el tiempo verbal correcto.
+	No se ha interpretado ningún supuesto.
+	No se ha proporcionado nueva información.
+	No se han usado ejemplos.
+	No se ha incluido información no pertinente.
+	No se ha cortado y pegado ningún pasaje de los resultados.
+	No se ha usado la primera persona.*
+* El uso de la primera persona «yo» es a menudo incorrecto y está prohibido en muchos estudios, aunque hay algunos estudios que lo aceptan. Descubre la postura de tu estudio respecto a la primera persona antes de usarla. En cualquier caso, recomendamos que no utilices la primera persona en ningún sitio que no sea el prólogo. ¿Quieres saber más sobre el tema?
+
+¿Qué aspecto tiene la discusión de tu TFG?
+En la discusión, escribes con un estilo más interpretativo sobre los resultados. Mientras que en las conclusiones de tu TFG has de ser conciso, en la sección de discusión has de escribir en mayor profundidad sobre el tema.
+
+En esta sección evalúas la investigación: puedes hablar de tus expectativas sobre posibles consecuencias de los resultados, sobre las posibles limitaciones y proporcionar sugerencias para investigaciones posteriores. Al igual que las conclusiones, redacta la discusión de tu TFG principalmente en presente.
+
+Interpretación de los resultados
+Empieza tu discusión con la validez de tu metodología de investigación. A continuación, habla sobre los resultados e indica si cumplen tus expectativas. En esta sección incluirás las explicaciones de por qué han o no cumplido tus expectativas.
+
+Estas expectativas pueden provenir de bibliografía relevante, pero también pueden basarse en tu propio sentido común. En cualquier caso, describe cómo encajan tus resultados en el marco que has bosquejado en el primer capítulo (introducción, motivación, marco teórico, y preguntas de investigación o hipótesis).
+
+Muestra también en qué manera los hallazgos aportan ideas nuevas o diferentes de lo que ya se conocía. Debate todas las posibilidades: ¿qué has demostrado ahora, exactamente?
+
+Limitaciones de tu investigación
+Presenta las limitaciones de tu investigación en un nuevo párrafo dentro de la discusión de tu TFG, TFM o tesis. Describe qué observaciones puedes hacer basándote en los resultados de la investigación. Estos comentarios pueden ser de naturaleza consultiva.
+
+Si hay notas al margen que puedan hacerse sobre la investigación, o si te viste obstaculizado por ciertas limitaciones, esto son asuntos que puedes explicar sobre los resultados obtenidos. Menciónalos, pero explicando también cómo pueden mejorarse estos factores en futuras investigaciones.
+
+Ten cuidado de no desbaratar todo tu proyecto de investigación; tu objetivo no es proporcionar una lista de todos tus errores. Estos deberían haber sido considerados cuidadosamente antes de empezar la investigación.
+
+Recomendaciones para investigaciones adicionales
+La discusión de tu TFG termina con un párrafo de sugerencias para posibles investigaciones posteriores. ¿Cómo pueden partir otros investigadores de tu investigación? Evita expresiones del tipo «todavía es necesaria mucha investigación».
+
+Más que dar una lista de lo que otros deberían hacer para completar tu investigación, tu objetivo es proporcionar sugerencias para la elaboración de un estudio independiente y posterior en respuesta a tu investigación.
+
+Lista de requisitos de la discusión de tu TFG
+	Se ha demostrado la validez de la investigación.
+	Se explican nuevas ideas.
+	Se tratan las limitaciones de la investigación.
+	Se indica si las expectativas estaban justificadas.
+	Se tratan las posibles causas y consecuencias de los resultados.
+	Se hacen nuevas sugerencias para posibles investigaciones posteriores.
+	Se incluyen interpretaciones propias en la discusión.
+	No hay sugerencias para investigaciones posteriores que sean demasiado imprecisas.
+
+
+
+\newpage
+## REFERENCIAS
+
+\vspace{15pt}
+
+
+
+Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol Evol. 8, 184-191.
+
+Maechler, M., Rousseeuw, P., Struyf, A., Hubert, M., Hornik, K.(2019).  cluster: Cluster Analysis Basics and Extensions. R package
+  version 2.1.0
+  
+NOTE: please also cite the 'tuneR' and 'seewave' packages if you use any spectrogram-creating or acoustic-measuring function
+  
+
+Uwe Ligges, Sebastian Krey, Olaf Mersmann, and Sarah Schnackenberg (2018). tuneR: Analysis of Music and Speech. URL: https://CRAN.R-project.org/package=tuneR
+
+
+Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.30.
+
+  Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963
+
+  Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng,
+  editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
+  
+
+Araya-Salas, M. (2018), *NatureSounds: a collection of animal sound for bioacoustic analysis in the R environment*. R package version
+  1.1.0.
+
+Sueur J, Aubin T, Simonis C (2008). seewave: a free modular tool for sound analysis and synthesis. Bioacoustics, 18: 213-226
+
+Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamline analysis of animal acoustic signals. Methods Ecol
+  Evol. 8, 184-191.
+
+  
+
+
+https://www.scribbr.es/normas-apa/hacer-una-lista-de-referencias-segun-las-normas-apa/
+
+
+Tabla de contenidos
+Reglas básicas para una lista de referencias en APA
+Autores según las normas APA 2017
+Cita de una cita
+Generador APA
+Excepciones en la lista de referencias
+Orden alfabético de la lista de referencias
+Diferencias entre una lista de referencias y una bibliografía
+Formato de la lista de referencias según APA
+Ejemplo: Lista de referencias
