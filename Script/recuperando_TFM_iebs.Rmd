@@ -17,7 +17,9 @@ knitr::opts_chunk$set(comment = NA)
 
 \begin{center} 
 
-TITULO DEL TRABAJO DE FINAL DE MASTER
+  
+CLASIFICACIÓN FRECUENCIAL DE MUESTRAS DE SONIDO A TRAVES DE LA REDUCCIÓN DE DIMENSIONALIDAD MEDIANTE ESCALAMIENTO MULTIDIMENSIONAL
+
 
 \end{center}
 
@@ -39,6 +41,8 @@ MASTER EN  BUSSINESS INTELLIGENCE AND DATA SCIENCE
 \vspace{96pt}
 
 NOMBRE DEL PROYECTO:	
+
+MACHINE LEARNING APLICADO AL DISEÑO DE SONIDO
 
 
 
@@ -65,37 +69,70 @@ NOMBRE DEL PROYECTO:
 
 
 \newpage
-[//]: <> (2 pagina.) 
+
+
 
 # CONTENIDO 
 
 \vspace{60pt}
 
-1. [RESUMEN...............................................................3](#resumen)
+
+
+[RESUMEN...............................................................3](#resumen)
 \vspace{12pt}
 
-2. [INTRODUCCIÓN........................................................4](#introducción)
+[INTRODUCCIÓN........................................................4](#introducción)
 \vspace{12pt}
 
-3. [ESTADO DEL ARTE....................................................5](#estado-del-arte)
+[ESTADO DEL ARTE.....................................................5](#estado-del-arte)
 \vspace{12pt}
 
-4. [OBJETIVOS............................................................6](#objetivos)
+[OBJETIVOS.............................................................6](#objetivos)
 \vspace{12pt}
 
-5. [SOLUCIÓN PLANTEADA..............................................7](#solución-planteada)
+[SOLUCIÓN PLANTEADA...............................................7](#solución-planteada)
 \vspace{12pt}
 
-6. [EVALUACIÓN...........................................................10](#evaluación)
+[Código fuente............................................................9](#codigo)
+    
 \vspace{12pt}
 
-7. [RESULTADOS...........................................................11](#resultados)
+
+1 [Muestras y análisis.....................................................11](#muestras-y-análisis)
+
+  + 1.1 [Espectrogramas................................................12](#espectrogramas)
+
+  + 1.2 [Parametros.....................................................14](#parametros-acusticos-de-las-muestras)
+
+
+
+2 [Definir un modelo......................................................15](#definir-el-modelo)
+
+  + 2.1 [Matriz de similitud.............................................16](#crear-la-matriz-de-similitud)
+
+  + 2.2 [Calculo de distancias...........................................16](#calculo-de-las-distancias)
+
+  + 2.3 [Escalado multidimensional......................................16](#escalado-multidimensional)
+
+
+
+3  [Evaluar modelo...17](#evaluar-el-modelo)
+
+  + 3.1 [Visualizacion en un sistema de coordenadas.....................17](#visualizacion)
+
 \vspace{12pt}
 
-8. [CONCLUSIONES Y TRABAJOS FUTUROS.............................12](#conclusiones-y-trabajos-futuros)
+
+[CONCLUSIONES Y TRABAJOS FUTUROS............................19](#conclusiones-y-trabajos-futuros)
 \vspace{12pt}
 
-9. [REFERENCIAS..........................................................14](#referencias)
+
+[RESULTADOS...........................................................21](#resultados)
+\vspace{12pt}
+
+
+[REFERENCIAS.........................................................23](#referencias)
+
 
 
 
@@ -121,23 +158,36 @@ NOMBRE DEL PROYECTO:
 \newpage
 ## RESUMEN
 
-\vspace{30pt}
+\vspace{20pt}
 
-Aproximación a una de las técnicas de clasificación que forman parte de la rama del Machine Learning y el aprendizaje no supervisado, referente a la reducción de dimensionalidad y concretamente al metodo de escalamiento multidimensional.   
-
-
-Para ello se comparará una de las muestras de audio, la que en adelante será tomada como referencia respecto al grupo y mediante el analisis de sus frecuencias entre todos los elementos del grupo (este será nuestro dataset) nos dará un resultado que será representado en un eje de coordenadas donde se podrá observar como de lejanas o cercanas son entre ellas.  
-
-\vspace{6pt}
+Ejercicio de aproximación a una de las técnicas de Machine Learning, mediante un conjunto de muestras de audio. El objetivo es aplicar un método de organización muy utilizado en la rama del aprendizaje no supervisado y relacionado con la reducción de dimensionalidad, este método de clasificación se realiza a través del escalamiento multidimensional.   
 
 
-\vspace{80pt}
+El escalamiento multidimensional (MDS) permite visualizar el nivel de similitud de los elementos individuales de un conjunto, es una de las formas de reducción de dimensión no lineal. Esta técnica de escalamiento multidimensional se llevará a cabo mediante el análisis frecuencial previo de cada uno de los elementos del conjunto obteniendo la diferencia o similitud entre las muestras de nuestro conjunto a nivel frecuencial. 
+
+
+El algoritmo MDS tiene como objetivo colocar cada objeto en un espacio N-dimensional para que las distancias entre los objetos se mantengan de la mejor manera posible, mas tarde, a cada objeto se le asignan coordenadas en cada una de las N dimensiones permitiendo visualizar el resultado.
+
+
+ 
+
+
+
+
+\vspace{40pt}
 
 ## Abstract
 
-\vspace{30pt}
+\vspace{20pt}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In suscipit lectus sapien, ut ultricies sem hendrerit vel. Phasellus sit amet lorem dictum, egestas nunc id, dignissim ipsum. Etiam dictum sapien vitae scelerisque elementum. Aenean eleifend eleifend mauris non facilisis. Nulla nec ex aliquam, sollicitudin enim ac, semper magna. Phasellus nec nisi metus. Vivamus vehicula dui sit amet sapien malesuada semper. Fusce sit amet metus a metus suscipit egestas. Vivamus metus enim, euismod in nunc a, lobortis gravida sapien. Cras efficitur facilisis elementum. Etiam ac molestie nisi. Suspendisse ut arcu a sem vestibulum aliquam nec nec ligula. Aenean at augue sit amet tellus semper ullamcorper. Proin consectetur dolor et lectus porta, vel sollicitudin justo consectetur. Curabitur pretium libero sit amet ex ultricies, id ultricies magna accumsan. Fusce in auctor sem.
+Exercise of approach to one of the techniques of Machine Learning, through a set of audio samples. The aim is to apply a method of organization widely used in the branch of unsupervised learning and related to the reduction of dimensionality, this method of classification is done through multidimensional scaling.   
+
+
+The multidimensional scaling (MDS) allows visualizing the level of similarity of individual elements of a set, is one of the forms of non-linear dimensional reduction. This technique of multidimensional scaling will be carried out through the previous frequency analysis of each of the elements of the set obtaining the difference or similarity between the samples of our set at frequency level. 
+
+
+The MDS algorithm aims to place each object in N-dimensional space so that the distances between the objects are maintained in the best possible way. Later, each object is assigned coordinates in each of the N dimensions allowing to graph the result.
+
 
 \vspace{6pt}
 
@@ -181,13 +231,15 @@ El resultado de esta labor es un trabajo metódico y artesanal donde el volumen 
 
 \vspace{6pt}
 
-Una herramienta que analice las muestras en las que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorrará tiempo a la hora de tomar decisiones de carácter creativo, pues permitirá establecer un punto de partida a partir de una muestra (la que quiera tomarse como referencia en el trabajo) y conocer cuál es el carácter de ese grupo de muestras.
+Una herramienta que analice las muestras (únicamente desde la perspectiva frecuencial) en las que el profesional está trabajando y determine si existe o no similitud entre las mismas es una solución que ahorraría tiempo a la hora de tomar decisiones de carácter creativo, pues permitirá establecer cuál es la predominancia frecuencial del conjunto y por tanto conocer cuál es el carácter tímbrico de ese grupo de muestras.
 
 \vspace{6pt}
 
-La solución propuesta para conseguir tal fin es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), referente al escalamiento multidimensional. 
+La solución propuesta para conseguir tal fin es la aplicación de una de las técnicas vistas en el módulo de Análisis predictivo con Machine Learning (Diego Calvo), referente al escalamiento multidimensional.
 
-Si bien es cierto que la solución ni es innovadora ni tampoco pretende serlo, es igualmente cierto que lo principalmente que se busca es la implementación del conocimiento adquirido en ML de la manera mas original posible evitando la dependencia de datasets externos a traves de un campo como es el audio en el que me siento cómodo y siendo honesto con lo aprendido. 
+Si bien es cierto que la solución no es innovadora, tampoco pretende serlo. Únicamente se busca la implementación del conocimiento adquirido en ML de la manera mas original posible evitando la dependencia de datasets externos a través de un campo como es el audio en el que me siento cómodo y siendo lo más honesto con lo aprendido en el curso.
+
+
 
 
 
@@ -218,7 +270,7 @@ Fuentes que he utilizado como punto de partida y en las que inspirado el trabajo
 
 \vspace{15pt}
 
-Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
+Clase práctica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
 
 \vspace{15pt}
 
@@ -231,7 +283,7 @@ https://marce10.github.io/2020/06/15/Automatic_signal_detection-_a_case_study.ht
 
 Sononym. "navegador de muestras de audio", utilidad que permite la catalogación de las muestras de audio a traves del analisis de las muestras.
 
-No he podido encontrar los principios cientificos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada y por ese motivo no son publicos, sin embargo en la publicidad del producto que ofrecen el principio de funcionamiento hace referencia al análisis de las muestras de sonido mediante Machine Learning para hacer la categorización de las muestras.
+No he podido encontrar los principios científicos en los que se apoya esta aplicación de software, porque forma parte del conocimiento interno de una empresa privada y por ese motivo no son públicos, sin embargo el producto hace referencia al análisis de las muestras mediante Machine Learning para hacer la categorización de las muestras.
 
 https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
@@ -270,25 +322,20 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 
 \vspace{12pt}
 
-1. Tomar una muestra como referencia y analizar el contenido frecuencial.
+1. Tomar unas muestras como referencia y analizar el contenido frecuencial de las mismas.
 
 
-2. Comparar las demás muestras con el contenido frecuencial de referencia mediante la correlación cruzada tiempo-frecuencia. 
+2. Definir un modelo:
 
-
-3. Definir el modelo:
-    + 3.1 Convertir la matriz de correlación en una matriz de disimilud.
+    + 2.1 Crear la matriz de similitud.
     
-    + 3.2 Ejecutar un escalado multidimensional.
+    + 2.2 Calcular las distancias entre los elementos.
     
-    + 3.3 Calcular las distancias entre los elementos.
+    + 2.3 Ejecutar un escalado multidimensional.
 
-4. Evaluar el modelo:
-    + 4.1 Visualización en diagrama de Boxplot entre las muestras.
-    
-    + 4.2  Visualizacion en diagrama de dispersion.
-    
-    + 4.3 Visualizacion en un sistema de coordenadas.
+3. Evaluar el modelo:
+
+    + 3.1 Visualizacion en un sistema de coordenadas.
 
 
 
@@ -311,559 +358,213 @@ La estrategia para conseguirlo será a traves de los siguientes puntos:
 \vspace{15pt}
 
 
-La metodología utilizada se basará en unas muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo. Tres conjuntos de muestras a modo de referencia con una serie de caracteristas particulares ayudan a determinar el correcto funcionamiento del modelo:
-
-\vspace{15pt}
+La metodología utilizada se basará en la comparación de un conjunto de muestras de audio a modo de referencia que permitirán comprobar el funcionamiento correcto del modelo.
 
 
-\  Conjunto A: Muestras con distinta frecuencia, misma duración y con una componente armónica similar (escala musical).
+\vspace{60pt}
 
-\  Conjunto B: Muestras con la misma frecuencia, misma duración y con una componente armónica diferente (armónicos).
-
-\  Conjunto C: Muestras sin ningún tipo de relación timbrica entre ellas y de misma duración que las anteriores (pretenden ser los outlayers del conjunto) elementos disruptivos en el analisis del conjunto.
-
-\vspace{15pt}
-
-## Elementos utilizados:
-
-\vspace{14pt}
-
-Make Noise 0 Coast:
-
-Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". La adición de armónicos en la señal que generada es el motivo principal de uso de este sintetizador.
-
-<center>
-
-![0 Coast Makenoise](/home/ion/TFM/0Coast.jpeg)
-
-</center>
-
-
-http://www.makenoisemusic.com/synthesizers/ohcoast
-
-https://www.soundonsound.com/reviews/make-noise-0-coast
-
-\vspace{15pt}
-
-Audacity
-
-Aplicación informática multiplataforma libre, que se puede usar para grabación y edición de audio, distribuido bajo la licencia GPLv2+.
-
-https://es.wikipedia.org/wiki/Audacity
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/Diagrama1.jpeg)]()
 
 
 
 \newpage
 
-## Procedimiento
 
-\vspace{14pt}
+Se han creado 6 muestras de audio partiendo del mismo origen y con las siguientes caracteristicas:
 
-Instalacion de las librerias
 
-``` {r INSTALAR LIBRERIAS}
-library(cluster) # dadisy
+|X_pitch-11.wav*            | Wave Object   |  
+|---------------------------|---------------| 
+|Number of Samples:         |   13020       |  
+|Duration (seconds):        |   0.295       | 
+|Samplingrate (Hertz):      |   44100       |  
+|Channels (Mono/Stereo):    |   Mono        | 
+|PCM (integer format):      |   TRUE        |
+|Bit (8/16/24/32/64):       |   16          |
+|Peak Freq                  | 96Hz@ -13,6dB | 
+|                           |               |
+
+|X_pitch-11_d.wav           | Wave Object     |  
+|---------------------------|-----------------| 
+|Peak Freq                  | 90Hz@ -7,4dB    |
+
+|X_pitch-11_dd.wav          | Wave Object     |  
+|---------------------------|-----------------|  
+|Peak Freq                  | 80Hz@ -4,4dB    |
+
+
+|X_pitch-22_d.wav           | Wave Object     |  
+|---------------------------|-----------------|  
+|Peak Freq                  | 182Hz@ -15,13dB |
+
+
+|X_pitch-11_dd.wav          | Wave Object     |  
+|---------------------------|-----------------|  
+|Peak Freq                  | 169Hz@ -8,7dB   |
+
+
+|X_pitch-11_dd.wav          | Wave Object     |  
+|---------------------------|-----------------|  
+|Peak Freq                  | 147Hz@ -5,2dB   |
+
+
+La duracion de las muestras es la misma, el motivo es evitar que las longitudes de muestras diferentes alteren los resultados del analisis frecuencial, subrayar que el motivo por el cual las muestras son tan graves es porque en un rango de frecuencia tan bajo permite añadir frecuencias mas altas mediante el efecto de distorsión.
+
+Los elementos que conforman nuestro conjunto de test son dos grupos de muestras que parten de un origen comun "**X_pitch-11.wav**":
+
+El primer grupo de muestras hace referencia a aquellas que tienen la nomenglatura **X_pitch-11_xx**, muestras unicamente modificadas a nivel armónico mediante un efecto de distorisión aplicado en **X_pitch-11_d** una vez y una vez más en **X_pitch-11_dd** con los mismos parametros de distorsión. 
+
+El segundo grupo de muestras es **X_pitch-22_xx**, muestras a las que previamente se les ha doblado la frecuencia con respecto a X_pitch-11 para posteriormente distorsionar las muestras con los mismos parámetros de distorsión aplicados en el primer grupo.
+
+Con este conjunto se pretende visualizar el funcionamiento de nuestro modelo poniendo especial enfasis en la relación frecuencial entre las muestras y la distorsión aplicada a cada una de ellas.
+
+
+
+
+
+\vspace{15pt}
+
+
+\newpage
+
+## Codigo
+
+``` {r 01 Instalación de librerias, echo=TRUE, eval=TRUE, warning=FALSE, message = FALSE}
+library(imager) 
+library()
 library(tuneR)
 library(knitr)
 library(NatureSounds)
 library(seewave)
 library(warbleR) 
-library(igraph) # hacer mencion al final no lo he hecho
+library(igraph) 
 ```
 
 
-\newpage
-
-\vspace{15pt}
-
-Creamos un data frame que posteriormente necesitaremos, en el crearemos las columnas con:
-
-*nombre de la muestra que vamos a tomar como referencia. 
-*numero de canal 
-*tiempo de inicio de muestra, 
-*tiempo de final de muestra  
-*"selec" = 2.  
-
-\vspace{14pt}
-
-
-```{r 01 Creamos un Data frame con la muestra de referencia que utilizaremos como plantilla}
-plantilla <- data.frame(sound.files = "X_pitch-02.wav",
-                        selec = 2, # Seleccionaremos la segunda muestra
-                        channel = 1, 
-                        start = 0,
-                        end = 0.2952381,
-                        stringsAsFactors = FALSE)
-plantilla
-```
-
-\vspace{15pt}
-
-Creamos un objeto "**wave**" a partir del único nombre que tenemos el dataframe "**plantilla**"
-
-El objeto "**wave**" tendrá una duración de x segundos tal, de hecho ya lo habiamos indicado en el dataframe y este será el tiempo con el que compararemos todas las demás muestras.
-
-\vspace{15pt}
-
-```{r 01 creamos un objeto wav mediante el dataframe plantilla }
-# creamos un objeto wav  
-wave_referencia <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
-wave_referencia
-```
-
-Establecemos la frecuencia (KHz) que queremos visualizar en el eje Y del grafico 
-
-Para ello vamos a determinar:
-
-Cual es la frecuencia mas alta que contiene nuestra muestra
-
-\vspace{15pt}
-
-
-```{r frecuencia clip}
-pico_freq_max <- fpeaks(spec(wave_referencia,dB = "max0",plot=TRUE ),nmax = 1)
-```
-
-```{r 02 limites de frecuencia en Y}
-
-zoom_X_10 = 10
-
-high_f <- (pico_freq_max[c(1,0)]) * zoom_X_10 # matrix to numeric
-low_f = 0
+```{r 02 Carga de las muestras en el espacio de trabajo, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+todas_las_muestras <- selection_table(whole.recs = TRUE, extended = TRUE)
 ```
 
 
-\newpage
-
-\vspace{15pt}
-
-Representación espectrográfica bidimensional de la señal de referencia a lo largo del tiempo:
-
-
-```{r PLOT  }
-
-fundamental_wave_referencia <- autoc(wave_referencia, threshold=0.01, plot=FALSE) # fundamental frequency
-
-spectro(wave_referencia,
-        wl = 1024,
-        ovlp = 99,
-        scale = TRUE,
-        cont = TRUE,
-        flim = c(low_f, high_f),
-        noisereduction = TRUE,
-         fastdisp = TRUE,
-        dB = 'max0',
-        flog = TRUE,
-        grid = TRUE,
-        palette = spectro.colors,
-)
-
-points(fundamental_wave_referencia, pch=25)
-legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
-```
-
-Los parametros elegidos para representar la señal han sido:
-
-\vspace{15pt}
-
-\ **wl** = longitud de la ventana para el análisis (número par de puntos).
-
-\ **ovlp**  = permite la superposición entre dos ventanas sucesivas .
-        
-\ **scale** =          traza una escala de color de dB en el lado derecho del espectrograma
-        
-\ **cont**           = sobreimprime las líneas de contorno en el espectrograma.
-
-\ **flim**           = modificaciones en los límites del eje Y de la frecuencia (en kHz).
-
-\ **noisereduction** = Reducción de ruido en la imagen, no es un filtro de señal.
-
-\  **dB**        = "max0" (por defecto) es el tipo de escala con la que vamos a trabajar. Si se establece en NULL, entonces se utiliza una escala lineal.
-        
-\  **flog**      = Traza la frecuencia en una escala logarítmica.
-
-\  **grid**      = visualización de la rejilla.	
-
-\  **collevels** = conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
-
-\vspace{15pt}
-
-\newpage
-
-\vspace{15pt}
-
-Creamos un nuevo dataframe con los archivos de sonido que tenemos en nuestro espacio de trabajo, en este dataframe también estara incluida el nombre de la muestra de referencia que queremos comparar.
-
-\vspace{15pt}
-
-```{r nuevo dataframe, comment = TRUE}
-sel_tab_1 <- selection_table(whole.recs = TRUE)
-sel_tab_1
-```
-\vspace{15pt}
-
-Combinamos el dataframe "**plantilla**" con el dataframe anterior "**sel_tab_1**" en un nuevo dataframe llamado "**sel_tab**"
-
-En esta combinación entre dataframes observamos que tenemos repetido el nombre elegido como referencia, con la particularidad de que la columna selec es diferente en uno y en el otro caso.
-
-\vspace{15pt}
-
-"X_pitch-02.wav	selec = 2 y X_pitch-02.wav	selec = 1"
-
-\vspace{15pt}
-
-Como en el inicio creamos el dataframe "**plantilla**" con una columna selec = 2 ahora esta columna nos permite diferenciar entre nombres iguales. 
-
-
-```{r sel_tab sel_tab_1 + plantilla}
-sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
-sel_tab
-```
-
-\newpage
-
-
-## Establecemos la comparación de las muestras:
-
-
-
-```{r}
-sel_tab$sound.files[1]
+```{r 03 Parametros acusticos, echo=TRUE, eval=TRUE, warning=FALSE}
+sample_acoust_param <- na.omit(specan(todas_las_muestras, wl = 512, fsmooth = 0.1, 
+                                      threshold = 10, wn = "hanning",
+                                      flim = c(0, 22), bp = c(0,20), 
+                                      fast.spec = FALSE, ovlp = 50, 
+                                      pal = reverse.gray.colors.2,
+                                      widths = c(2, 1), main = NULL, 
+                                      plot = TRUE, all.detec = FALSE)) 
 ```
 
 
-Seleccionamos el nombre de la muestra referencia
-```{r}
-sel_tab$selec[1] 
-```
-
-Junto con el select = 2
-
-```{r comparacion muestras}
-comp_matrix <- cbind(paste(sel_tab$sound.files[1],
-                           sel_tab$selec[1], sep = "-"),
-                     sel_tab$sound.files)
-```
-
-Esta es la relación de muestras que será guardada en un nuevo dataframe llamado "comp_matrix", preparado para pasarlo a la función de correlación en el siguiente paso. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage
-
-\vspace{15pt}
-
-
-## Funcion de correlación:
-
-En el procesamiento de señales, la correlación cruzada es una medida de similitud de dos series en función del desplazamiento en este caso de frecuencias de una con respecto a la otra. Tiene aplicaciones en reconocimiento de patrones, análisis de partículas individuales, tomografía electrónica, promediado, criptoanálisis y neurofisiología. 
-
-La correlación cruzada es de naturaleza similar a la convolución de dos funciones. En una autocorrelación, que es la correlación cruzada de una señal consigo misma, siempre habrá un pico en un retraso de cero, y su tamaño será la energía de la señal.
-
-
-```{r funcion de correlacion}
-xc_output <- xcorr(X = sel_tab,
-           output = 'list',
-           compare.matrix = comp_matrix,
-           bp = c(low_f, 20),
-           parallel = 4,
-           na.rm = TRUE)
-```
-
-Parámetros:
-
-\ X = sel_tab  datos que contiene columnas para archivos de sonido (sound.files), columna con número de selección (selec), tiempo de inicio y final de la señal.
-\ output = 'list': formato de salida. 
-\ compare.matrix = comp_matrix,
-\ bp = c(low_freq, high_freq),
-\ parallel = Numero de nucleos del procesador funcionando en paralelo.
-\ na.rm = todos aquellos NAs producidos cuando las correlaciones cruzadas por pares fallaron son eliminados de los resultados. Esto significa que todas las selecciones con al menos 1 correlación cruzada que fallaron son excluidas.
-
-
-\vspace{15pt}
-
-```{r}
-matriz_principal <- data.frame(xc_output$scores$sound.files, 
-                               xc_output$scores$score) # conversion de matriz a df # sel_tab$sound.files
+```{r 04 Xcorr , eval=TRUE, echo=TRUE, warning=FALSE}
+xcor <- xcorr(todas_las_muestras, bp = c(0, 20), wl = 512, ovlp = 99, path = NULL,
+              type = "mfcc", method= 1, na.rm = TRUE)
 ```
 
 
-
-```{r}
-# Esta es la matríz de correlación cruzada tiempo-frecuencia
-xcor <- xcorr(X = sel_tab_1,
-              bp = c(low_f, 
-                     20), 
-              wl = 512,
-              ovlp = 99,
-              path = NULL,
-              type = "mfcc", 
-              na.rm = TRUE)
-```
-
-\vspace{15pt}
-
-\vspace{15pt}
-### ELIMINAR DISSIMILARITY
-```{r}
-# Ejecutar una matriz simétrica completa que contiene las disimilitudes 
-dissimilarity <- daisy(xcor)
-dissimilarity
-```
-
-\vspace{15pt}
-
-\vspace{15pt}
-
-```{r}
-# Ejecutar el escalado multidimensional (CMS)
-modelo <- cmdscale(dissimilarity)
-modelo
-```
-
-\vspace{15pt}
-
-\vspace{15pt}
-
-```{r}
-# Calcular las distancias entre elementos
+```{r 05 Matriz de similaridad , echo=TRUE, eval=TRUE,warning=FALSE}
 distancia <- dist(xcor, method = "euclidean")
-distancia
 ```
 
 
-## Visualizacion en Boxplot y diagrama de dispersion 
-
-\vspace{15pt}
-
-```{r Boxplot entre las muestras, plot=TRUE }
-
-
-
-tipo = "h"
-
-thrhld = 0
-
-ref_X_pitch_2 <- autoc(wave_referencia, threshold=thrhld, plot=FALSE)
-ref_X_pitch_mono <- mono(wave_referencia)
-ref_X_pitch_f_max <- fpeaks(spec(ref_X_pitch_mono),nmax = 1)
-
-X_Hit <- read_wave(sel_tab_1$sound.files[1])
-ref_X_Hit <- autoc(X_Hit, threshold=thrhld, plot=FALSE)
-X_Hit_mono <- mono(X_Hit)
-X_Hit_f_max <- fpeaks(spec(X_Hit_mono),nmax = 1)
-
-X_Low <- read_wave(sel_tab_1$sound.files[2])
-ref_X_Low <- autoc(X_Low, threshold=thrhld, plot=FALSE)
-X_Low_mono <- mono(X_Low)
-X_Low_f_max <- fpeaks(spec(X_Low_mono),nmax = 1)
-
-#pdf(file = NULL)
-```
-
-
-
-
-```{r }
-old.par <- par(mfrow=c(2, 3))
-
-hf <- as.numeric(ref_X_pitch_f_max[1,1])
-
-Ws_X_pitch <- periodogram(ref_X_pitch_mono, 
-                        frqRange = c(0, hf*10000),width = 2^13 )
-plot(Ws_X_pitch)
-title(main = list("X_pitch (ref)", cex = 1.5,col = "red", font = 3))
-
-
-
-hf <- as.numeric(X_Hit_f_max[1,1])
-
-Ws_X_Hit <- periodogram(X_Hit_mono, 
-                        frqRange = c(0, hf*10000),width = 2^13 )
-plot(Ws_X_Hit)
-title(main = list("X_Hit ", cex = 1.5,col = "red", font = 3))
-
-
-
-
-hf <- as.numeric(X_Low_f_max[1,1])
-Ws_X_Low <- periodogram(X_Low_mono, 
-                        frqRange = c(0, hf*10000),width = 2^13 )
-plot(Ws_X_Low)
-title(main = list("X_Low ", cex = 1.5,col = "red", font = 3))
-
-
-par(old.par)
-
-```
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-old.par <- par(mfrow=c(1, 3))
-
-X_pitch_6 <- read_wave(sel_tab_1$sound.files[4])
-ref_X_pitch_6 <- autoc(X_pitch_6, threshold=thrhld, plot=FALSE)
-plot(ref_X_pitch_6, type = tipo, xlab = "Componente frecuencial", ylab = "Amplitud")
-title(main = list("X_pitch_6 ", cex = 1.5,col = "red", font = 3))
-
-
-X_pitch_17 <- read_wave(sel_tab_1$sound.files[5])
-ref_X_pitch_17 <- autoc(X_pitch_17, threshold=thrhld, plot=FALSE)
-plot(ref_X_pitch_17, type = tipo, xlab = "Componente frecuencial", ylab = "Amplitud")
-title(main = list("X_pitch_17 ", cex = 1.5,col = "red", font = 3))
-
-par(old.par)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-
-old.par <- par(mfrow=c(1, 2))
-
-plot(xcor, type = "b", xlab = "Simililltud Frecuencial", ylab = "Tímbrica")
-text(xcor[,1],xcor[,2], labels = rownames(xcor), pos = 4, cex = 0.8 )
-
-plot(xcor, type = "h", xlab = "Frecuencia", ylab = "Cantidad armónica")
-text(xcor[,1],xcor[,2], labels = rownames(xcor), pos = 4, cex = 0.8 )
-
-par(old.par)
-```
-
-\vspace{15pt}
-
-\vspace{15pt}
-
-
-```{r}
-# Las dos primeras coordenadas principales (valores propios) son:
+```{r 06 PCA, echo=TRUE, eval=TRUE,warning=FALSE}
 valores <- cmdscale(distancia, eig = T)
 ```
 
-\vspace{15pt}
 
-\vspace{15pt}
+```{r 07 PLOT-1 , echo=TRUE, eval=FALSE,warning=FALSE}
+old.par <- par(mfrow=c(1, 2))
+
+#plot(modelo, type = "p", xlab = "Coord 1", ylab = "Coord 2")
+plot(xcor, type = "p", xlab = "Coord 1", ylab = "Coord 2")
+text(xcor[,1],xcor[,2], labels = rownames(xcor), pos = 2, cex = 0.8 )
+matplot(xcor, lty = 1)
+
+par(old.par)
+```
+
+
+```{r 08 PLOT-2, echo=TRUE, eval=FALSE,warning=FALSE}
+plot(sample_acoust_param$dfrange)
+title(main = "frecuencia dominante", cex = 1.5,col = "red", font = 3)
+```
+
+```{r 09 PLOT-3, echo=TRUE, eval=FALSE,warning=FALSE}
+old.par <- par(mfrow=c(2, 3))
+
+plot(sample_acoust_param$meanfreq)
+title(main = "Frecuencia media", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$sd)
+title(main = "desviación estandar", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$skew)
+title(main = "asimetria", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$kurt)
+title(main = "Pico del espectro", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$sp.ent) 
+title(main = "entropía espectral", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$dfrange)
+title(main = "frecuencia dominante", cex = 1.5,col = "red", font = 3)
+
+par(old.par)
+```
 
 
 
-
-
-```{r}
-#Valores propios calculados
+```{r, echo=FALSE, eval=FALSE,warning=FALSE}
 valores$eig
-# Determinar el ajuste
+```
+
+
+```{r, echo=FALSE, eval=FALSE,warning=FALSE}
 valores$GOF
 ```
 
+```{r,  echo=TRUE, eval=FALSE,warning=FALSE}
 
-\vspace{15pt}
-
-\vspace{15pt}
-
-grafo con todos los elementos
-
-```{r}
-
-# Definir un grafo de tamaño 5 para poder incluir todos los elementos
 graf <- graph.tree(ncol(xcor),mode = c("in"))
-# Dar matriz_principal a los vertices del grafo con el matriz_principal de los archivos de audio
-#colnames(xcor)
 V(graf)$label <- colnames(xcor)
+
 layout <- layout.mds(graf, dist = as.matrix(distancia))
+
 plot(graf, vertex.size = .1)
-plot(graf, type ="b", layout = layout, vertex.size = 25)
 ```
 
-\vspace{15pt}
-
-\vspace{15pt}
 
 
 
 
 
 
-Por último, explican que la investigación consistió en la aplicación de los instrumentos (o sea, los cuestionarios) de forma individual y anónima, durante el horario escolar.
-
-4. Análisis estadístico (o análisis de datos)
-Aquí se describe cómo has analizado los datos, qué programa o qué métodos estadísticos has empleado.
-
-Ya que el tema del análisis estadístico es un mundo aparte para mí, directamente te remito al artículo de nuestro ejemplo. Allí verás cómo lo hacen sus autores.
 
 
 
 
-En esta sección el estudiante debe describir la solución planteada, comenzando por la metodología (pasos que siguió) de desarrollo. Posteriormente la descripción del desarrollo de cada etapa seguida. 
-La metodología que debe utilizar el estudiante de master debe estar validada por la comunidad científica y el estudiante debe justificarlo.
-    1. METODOLOGÍA
-        ◦ Etapa 1
-        ◦ Etapa 2
-        ◦ Etapa 3
-        ◦ Etapa 4
-        ◦ Etapa 5
-    2. DESARROLLO DE CADA ETAPA
-Extensión máxima: 30 páginas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -873,41 +574,308 @@ Extensión máxima: 30 páginas.
 
 
 \newpage
-## EVALUACIÓN
+
+## 1 Muestras y análisis
+
+Visualizamos las muestras cargadas en el espacio de trabajo
+
+
+
+```{r 02b Muestras del espacio de trabajo, echo=TRUE, warning=FALSE}
+todas_las_muestras 
+```
+
+
+\newpage
+
+## 1.1 Espectrogramas
+
+Representación en tres dimensiones, temporal, frecuencial y amplitud de la distribución de energía de una señal.
+
+El espectrograma es el resultado de calcular la distribución de las amplitudes para cada frecuencia de un fenómeno ondulatorio que sea lal superposición de ondas de varias frecuencias de tramas de una señal. Una gráfica tridimensional que representa la energía del contenido frecuencial de la señal según va variando a lo largo del tiempo.
+
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-11.png)]()
+
+\vspace{15pt}
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-11_d.png)]()
+
+\vspace{15pt}
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-11_dd.png)]()
+
+\vspace{15pt}
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-22.png)]()
+
+\vspace{15pt}
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-22_d.png)]()
+
+\vspace{15pt}
+
+[![image](/home/ion/TFM/TFM_iebs/TFM_iebs/Script/X_pitch-22_dd.png)]()
+
+\newpage
+
+##  1.2 Parametros acusticos de las muestras
+
+```{r 03b Parametros acusticos, echo=TRUE, eval=TRUE, warning=FALSE}
+head(sample_acoust_param,1)
+```
+
+**duration**: longitud de la señal en segundos.
+
+\vspace{6pt}
+
+**meanfreq**: frecuencia media (en kHz). Media del espectro de frecuencias (es decir, media ponderada de la frecuencia por la amplitud dentro del paso de banda suministrado). 
+
+\vspace{6pt}
+
+**sd**: Desviación estándar de la frecuencia (en kHz).
+
+\vspace{6pt}
+
+**freq.median**: frecuencia media. La frecuencia en la que la señal se divide en dos intervalos de frecuencia de igual energía (en kHz).
+
+\vspace{6pt}
+
+**freq.Q25**: la primera frecuencia de cuartil. La frecuencia en la que la señal se divide en dos intervalos de frecuencia de 25% y 75% de energía respectivamente (en kHz).
+
+\vspace{6pt}
+
+**freq.Q75**: frecuencia del tercer cuartil. La frecuencia en la que la señal se divide en dos intervalos de frecuencia de 75% y 25% de energía respectivamente (en kHz). 
+
+\vspace{6pt}
+
+**freq.IQR**: rango de frecuencia intercuartil. Gama de frecuencias entre 'freq.Q25' y 'freq.Q75' (en kHz).
+
+\vspace{6pt}
+
+**time.median**: tiempo medio. El tiempo en el que la señal se divide entre dos intervalos.
+
+\vspace{6pt}
+
+**time.Q25**: el primer tiempo de cuartil. El tiempo en el que la señal se divide en dos intervalos de tiempo de 25% y 75% de energía respectivamente (en s).
+
+\vspace{6pt}
+
+**time.Q75**: el tiempo del tercer cuartil. El tiempo en el que la señal se divide en dos intervalos de tiempo de 75% y 25% de energía respectivamente (en s).
+
+\vspace{6pt}
+
+**time.IQR**: rango de tiempo intercuartílico. Rango de tiempo entre "tiempo.Q25" y "tiempo.Q75" (en s).
+
+\vspace{6pt}
+
+**skew**: asimetría. Asimetría del espectro.
+
+\vspace{6pt}
+
+**kurt**: Picos del espectro
+
+\vspace{6pt}
+
+**sp.ent**: Distribución energética del espectro de frecuencias. Tono puro ~ 0; ruidoso ~ 1.
+
+\vspace{6pt}
+
+**time.ent**: entropía del tiempo. Distribución de la energía en la envoltura del tiempo. Tono puro ~ 0; ruidoso ~ 1.
+
+\vspace{6pt}
+
+**entropy**:  entropía espectrográfica. Producto del tiempo y la entropía espectral **sp.ent * time.ent**.       
+
+\vspace{6pt}
+
+**sfm**: planitud espectral. Similar a sp.ent (Tono puro ~ 0; ruidoso ~ 1).
+
+\vspace{6pt}
+
+**meandom**: promedio de la frecuencia dominante medida a través de la señal acústica.  
+
+\vspace{6pt}
+
+**mindom**: mínimo de la frecuencia dominante medida a través de la señal acústica.
+
+\vspace{6pt}
+
+**maxdom**: máximo de la frecuencia dominante medida a través de la señal acústica.
+
+\vspace{6pt}
+
+**dfrange**: rango de frecuencia dominante medido a través de la señal acústica.
+
+\vspace{6pt}
+
+**modindx**: índice de modulación. Calculado como la diferencia absoluta acumulada entre las mediciones adyacentes de las frecuencias dominantes dividida por la gama de frecuencias dominantes. 1 significa que la señal no está modulada , 0 que sí lo está.
+
+\vspace{6pt}
+
+**startdom**: medición de la frecuencia dominante al inicio de la señal.
+
+\vspace{6pt}
+
+**enddom**: medición de la frecuencia dominante al final de la señal.
+
+\vspace{6pt}
+
+**dfslope**: pendiente del cambio de la frecuencia dominante a través del tiempo ((enddom-startdom)/duración). Las unidades son kHz/s.
+
+\vspace{6pt}
+
+**meanpeakf**: frecuencia media de pico. Frecuencia con la mayor energía del espectro de frecuencia media.
+
+\vspace{6pt}
+
+## 2 Definir el modelo:
+
+En el procesamiento de señales, la correlación cruzada (o a veces denominada "covarianza cruzada") es una medida de la similitud entre dos señales, frecuentemente usada para encontrar características relevantes en una señal desconocida por medio de la comparación con otra que sí se conoce. Es una función del tiempo relativa a las señales, a veces también se la llama producto escalar desplazado, y tiene aplicaciones en el reconocimiento de patrones y en criptoanálisis de las muestras sonoras por medio de la correlación cruzada tiempo-frecuencia.
+
+Primero se crean las matrices (manteniéndolas internamente como una lista) y se calcula la correlación cruzada en un segundo paso.
+
+El cepstrum de frecuencia de mel (MFC) es una representación del espectro de potencia a corto plazo de un sonido, basado en una transformación coseno lineal de un espectro de potencia logarítmica en una escala de frecuencia de mel no lineal.
+\newpage
+
+## 2.1 Matriz de similitud
+
+```{r 04b Xcorr , eval=TRUE, echo=TRUE, warning=FALSE}
+xcor 
+```
+## 2.3 Calculo de las distancias
+
+Medida de distancia especificada para calcular las distancias entre las filas de una matriz de datos.
+
+```{r 05b Matriz de similaridad , echo=TRUE, eval=TRUE, warning=FALSE}
+distancia
+```
+
+## 2.3 Escalado multidimensional
+
+Escalamiento multidimensional (MDS) de una matriz de datos. También conocido como análisis de coordenadas principales.
+```{r 06b PCA, echo=TRUE, eval=TRUE,warning=FALSE}
+ 
+valores_distancia <- as.data.frame(valores$points)
+```
+
+\newpage
+
+## 3 Evaluar el modelo
+
+## 3.1 Visualizacion
+ 
+
+En esta primera representación vemos la disposición de los elementos de nuestro conjunto en un espacio bidimensional indicando cual es la similitud frecuencial que existe entre las muestras. 
+
+
+Representación de los valores de la matriz de correlación
+
+```{r 3.1 Visualizacion en un sistema de coordenadas , echo=FALSE, eval=TRUE,warning=FALSE}
+plot(valores_distancia, type = "p", xlab = "Coord 1", ylab = "Coord 2")
+text(valores_distancia[,1],valores_distancia[,2], labels = colnames(valores_distancia), pos = 4, cex = 0.8, offset = 0.2)
+
+```
+
+
+
+Únicos elementos (V1 y V2) que reprentan al conjunto de muestras tras haber sido analizado.
+
+\newpage
+
+## CONCLUSIONES 
+
+
+El objetivo inicial de visualizar las diferencias frecuencial entre los elementos de un conjunto mediante el escalamiento multidimensional ha sido llevado a buen término.
+
+El analisis de la relación frecuencial a partir del conjunto de muestras nos ha dotado de un dataset de datos unico. 
+
+Se ha observado que dado que el ejercicio es muy sencillo y no incluye elementos que tengan en cuenta la duración de las muestras, es necesario que las muestras tengan la misma duración ya que es muy importante a la hora de hacer la correlación frecuencial cruzada y no interferir en el resultado.
+
+
+\vspace{45pt}
+
+```{r 09b PLOT-3, echo=FALSE, eval=TRUE,warning=FALSE}
+old.par <- par(mfrow=c(1, 3))
+
+
+plot(sample_acoust_param$dfrange)
+title(main = "frecuencia dominante", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$meanfreq)
+title(main = "Frecuencia media", cex = 1.5,col = "red", font = 3)
+
+plot(sample_acoust_param$sd)
+title(main = "desviación estandar", cex = 1.5,col = "red", font = 3)
+
+par(old.par)
+```
+
+```{r 3.1 Visualizacion en un sistema de coordenadas xcorr, echo=FALSE, eval=TRUE,warning=FALSE}
+plot(xcor, type = "p", xlab = "Coord 1", ylab = "Coord 2")
+text(xcor[,1],xcor[,2], labels = colnames(xcor), pos = 3.2, cex = 0.6, offset = -0.4)
+```
+Esta es la representación gráfica de los elementos de la matríz de correlación  
+
+
+Las muestras a las que no se les a doblado la frequencia **X_pitch-11.wav, X_pitch-11_d.wav, X_pitch-11_dd.wav** en la parte inferior izquierda y aquellas a las que si se les ha modificado la frecuencia **X_pitch-22.wav X_pitch-22_d.wav X_pitch-22_dd.wav** y se encuentran mas a la derecha del gráfico. 
+
+Cabe destacar que ambos grupos de muestras comparten el mismo indice de distorsión en las muestras y que debido a ello se puede verse claramente reflejado en el eje de coordenadas 2. 
+
+
+
+```{r 07b PLOT-2 , echo=FALSE, eval=TRUE,warning=FALSE}
+matplot(xcor, type = "o",lty = 1:8, lwd = 1 )
+```
+
+Cada una de las columnas de la matríz de correlación es comparada contra las demás columnas de la matriz, cada columna representa una muestra de sonido.
+
+Se aprecia que la distorsión máxima que se le ha aplicado a las muestras influyen en el resultado a nivel frecuencial, esto se puede observar en la 2 columna y en la 5, ya que es donde mayor diferencia (son las más distorsionadas) entre las muestras del mismo grupo.
+
+Conforme más arriba en la columna esté la muestra que comparamos más parecido tendrá ese sonido con la muestra comparada.
+
+Se observa que existe una mayor similitud entre la muestra 1 X_pitch-11_d.wav (columna) y las muestras X_pitch-11_dd.wav (2) y X_pitch-11.wav (3) que entre X_pitch-11_d.wav (1) y las muestras X_pitch-22_d.wav (4), X_pitch-22_dd.wav (5) y X_pitch-22.wav (6).
+
+
+```{r 08b PLOT-2 colorines, echo=FALSE, eval=TRUE,warning=FALSE}
+plot(valores_distancia, type = "p", xlab = "Coord 1", ylab = "Coord 2")
+text(valores_distancia[,1],valores_distancia[,2], labels = colnames(xcor), pos = 3.2, cex = 0.5, offset = -0.4)
+```
+
+Observamos dos grupos claramente diferenciados gracias al análisis de las coordenadas principales (PCA).
+
 
 \newpage
 ## RESULTADOS
 
+Para evaluar el modelo le pasaré una libreria de sonido de 8 bits que hice hace un tiempo y que contiene 172 elementos. 
 
-En este capítulo, pones en práctica la metodología de la investigación que has descrito en el capítulo anterior. Por lo tanto, aquí aplicas los métodos específicos. Describes cómo se desenvolvió la investigación y analizas los resultados.
+```{r sound_design 01, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(ggfortify)
 
+alles_dir <- "/media/ion/WD-500/back-up/05_Vídeos/Vídeos/04_Portfolio/01_Gameprefabs/8 bit construction kit/Alles"
 
+wav_names <- list.files(alles_dir, pattern = "\\.wav$")
 
+sound_design <- selection_table(whole.recs = TRUE, path = alles_dir, extended = TRUE)
 
+xcor <- xcorr(sound_design, bp = c(0, 20), wl = 512, ovlp = 99, path = alles_dir,
+              type = "mfcc", method= 1, na.rm = TRUE,
+              parallel = 4)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+distancia <- dist(xcor, method = "euclidean")
+  
+valores <- cmdscale(distancia, eig = T)
 
 
 
+autoplot(cmdscale(distancia, eig = T), label = TRUE, label.size = 3, frame = TRUE)
+
+```
 
 
-
-
-
-
+Vemos que hay muestras que estan mas "juntas", estas son aquellas que tienen una mayor similitud frecuencial entre ellas. Llegados a este punto dariamos por concluida la busqueda de una herramienta que nos permitiera saber cual es la predominancia frecuencial de nuestra libreria de sonidos.
 
 
 
@@ -919,83 +887,12 @@ En este capítulo, pones en práctica la metodología de la investigación que h
 
 
 
-\newpage
-## CONCLUSIONES Y TRABAJOS FUTUROS
 
-Tu TFG, TFM o tesis debe terminar con unas conclusiones y una discusión. Estas son dos partes o secciones diferentes, pero a veces es difícil separarlas. Este artículo trata sobre estas dos partes y la información que, como mínimo, debe contener cada parte.
 
-Conclusiones TFG: ¿Qué aspecto tienen?
-El propósito de las conclusiones de un TFG es dar respuesta a tu pregunta de investigación. Para empezar, repite la pregunta de investigación. Sin embargo, no te limites a reiterar dicha pregunta, sino que debes integrar una explicación de la misma en el resto de la discusión de la sección.
 
-A continuación, expón las conclusiones que has extraído de los resultados de tu investigación (utiliza los resultados clave que sean más relevantes para responder a tu pregunta de investigación).
+\vspace{15pt}
 
-Por último, responde a la pregunta principal y explica cómo has llegado a esta conclusión. No te limites a incluir la pregunta con la respuesta a continuación, explícala cuidadosamente e intégrala en el resto del texto. Indica solo las observaciones, sin hacer interpretaciones.
 
-Ejemplo 1: Proporciona observaciones
-Observación: Diez encuestados estuvieron de acuerdo con la afirmación de que los elefantes son animales maravillosos y seis disintieron. Por tanto, la mayoría estuvo de acuerdo.
-
-Interpretación: Diez encuestados estuvieron de acuerdo con la afirmación de que los elefantes son animales maravillosos y seis disintieron. Esto demuestra que a diez personas les impresionó mucho el carácter del animal y que seis personas odiaban a los elefantes.
-
-En términos de tiempos verbales, en las conclusiones de tu TFG se utiliza el presente al presentar hechos, y el pretérito o pretérito perfecto al hacer referencia a la investigación que has realizado.
-
-Ejemplo 2: Tiempos verbales en las conclusiones de tu TFG
-Hechos en presente: La compañía X actualmente no tiene una visión y misión claras. La compañía tampoco hace (está haciendo) buen uso de los medios sociales para vender sus productos.
-
-Tu investigación en pretérito: Esta investigación examinó si la Compañía X tiene una visión y misión claras […] Los resultados mostraron que la Compañía X … […] El investigador también analizó cuándo …
-
-Tu investigación en pretérito perfecto: Esta investigación ha examinado si la Compañía X tiene una visión y misión claras […] Los resultados han mostrado que la Compañía X … […] El investigador también ha analizado cuándo …
-
-La extensión de las conclusiones de tu TFG debe ser de entre 200 y 400 palabras. Presta atención:
-
-¿Has usado una hipótesis en vez de una pregunta de investigación? En ese caso, indica si la hipótesis se ha demostrado cierta.
-No incluyas información nueva en las conclusiones de tu TFG. Cualquier información nueva debe presentarse antes en el TFG.
-No des ejemplos en tus conclusiones, ya que ya deberías haber elaborado las conclusiones de tu TFG (con ejemplos) en el resto de tu investigación. Por ejemplo, si concluyes que la crisis financiera ha afectado negativamente a los ingresos de los bancos, entonces no has de mencionar también que el Banco XYZ ha tenido, «por ejemplo», un 20% menos de ingresos en 2009 que en 2007.
-Lista de requisitos de las conclusiones de tu TFG
-	Se han contestado las preguntas de investigación.
-	Se ha respondido a la pregunta principal o la exposición del problema.
-	Se han confirmado o refutado las hipótesis.
-	Se ha utilizado el tiempo verbal correcto.
-	No se ha interpretado ningún supuesto.
-	No se ha proporcionado nueva información.
-	No se han usado ejemplos.
-	No se ha incluido información no pertinente.
-	No se ha cortado y pegado ningún pasaje de los resultados.
-	No se ha usado la primera persona.*
-* El uso de la primera persona «yo» es a menudo incorrecto y está prohibido en muchos estudios, aunque hay algunos estudios que lo aceptan. Descubre la postura de tu estudio respecto a la primera persona antes de usarla. En cualquier caso, recomendamos que no utilices la primera persona en ningún sitio que no sea el prólogo. ¿Quieres saber más sobre el tema?
-
-¿Qué aspecto tiene la discusión de tu TFG?
-En la discusión, escribes con un estilo más interpretativo sobre los resultados. Mientras que en las conclusiones de tu TFG has de ser conciso, en la sección de discusión has de escribir en mayor profundidad sobre el tema.
-
-En esta sección evalúas la investigación: puedes hablar de tus expectativas sobre posibles consecuencias de los resultados, sobre las posibles limitaciones y proporcionar sugerencias para investigaciones posteriores. Al igual que las conclusiones, redacta la discusión de tu TFG principalmente en presente.
-
-Interpretación de los resultados
-Empieza tu discusión con la validez de tu metodología de investigación. A continuación, habla sobre los resultados e indica si cumplen tus expectativas. En esta sección incluirás las explicaciones de por qué han o no cumplido tus expectativas.
-
-Estas expectativas pueden provenir de bibliografía relevante, pero también pueden basarse en tu propio sentido común. En cualquier caso, describe cómo encajan tus resultados en el marco que has bosquejado en el primer capítulo (introducción, motivación, marco teórico, y preguntas de investigación o hipótesis).
-
-Muestra también en qué manera los hallazgos aportan ideas nuevas o diferentes de lo que ya se conocía. Debate todas las posibilidades: ¿qué has demostrado ahora, exactamente?
-
-Limitaciones de tu investigación
-Presenta las limitaciones de tu investigación en un nuevo párrafo dentro de la discusión de tu TFG, TFM o tesis. Describe qué observaciones puedes hacer basándote en los resultados de la investigación. Estos comentarios pueden ser de naturaleza consultiva.
-
-Si hay notas al margen que puedan hacerse sobre la investigación, o si te viste obstaculizado por ciertas limitaciones, esto son asuntos que puedes explicar sobre los resultados obtenidos. Menciónalos, pero explicando también cómo pueden mejorarse estos factores en futuras investigaciones.
-
-Ten cuidado de no desbaratar todo tu proyecto de investigación; tu objetivo no es proporcionar una lista de todos tus errores. Estos deberían haber sido considerados cuidadosamente antes de empezar la investigación.
-
-Recomendaciones para investigaciones adicionales
-La discusión de tu TFG termina con un párrafo de sugerencias para posibles investigaciones posteriores. ¿Cómo pueden partir otros investigadores de tu investigación? Evita expresiones del tipo «todavía es necesaria mucha investigación».
-
-Más que dar una lista de lo que otros deberían hacer para completar tu investigación, tu objetivo es proporcionar sugerencias para la elaboración de un estudio independiente y posterior en respuesta a tu investigación.
-
-Lista de requisitos de la discusión de tu TFG
-	Se ha demostrado la validez de la investigación.
-	Se explican nuevas ideas.
-	Se tratan las limitaciones de la investigación.
-	Se indica si las expectativas estaban justificadas.
-	Se tratan las posibles causas y consecuencias de los resultados.
-	Se hacen nuevas sugerencias para posibles investigaciones posteriores.
-	Se incluyen interpretaciones propias en la discusión.
-	No hay sugerencias para investigaciones posteriores que sean demasiado imprecisas.
 
 
 
@@ -1035,17 +932,3 @@ Araya-Salas, M. and Smith-Vidaurre, G. (2017), warbleR: an r package to streamli
 
   
 
-
-https://www.scribbr.es/normas-apa/hacer-una-lista-de-referencias-segun-las-normas-apa/
-
-
-Tabla de contenidos
-Reglas básicas para una lista de referencias en APA
-Autores según las normas APA 2017
-Cita de una cita
-Generador APA
-Excepciones en la lista de referencias
-Orden alfabético de la lista de referencias
-Diferencias entre una lista de referencias y una bibliografía
-Formato de la lista de referencias según APA
-Ejemplo: Lista de referencias
