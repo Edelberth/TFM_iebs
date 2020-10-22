@@ -5,8 +5,16 @@ author: "Alberto Jimenez"
 date: "27/8/2020"
 ---
 
+<<<<<<< HEAD
 ```{r setup, include=FALSE,  comment = NULL}
 knitr::opts_chunk$set(comment = NULL)
+=======
+
+
+
+```{r setup }
+knitr::opts_chunk$set(comment = NA)
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 ```
 
 [//]: <> (Primera pagina.) 
@@ -218,6 +226,11 @@ Las fuentes que he utilizado como punto de partida y en las que inspirado el tra
 
 Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
 
+
+\vspace{15pt}
+
+Clase practica de Machine Learning del Master de IEBS (Bussiness Intelligence y Big Data) con Diego Calvo sobre la reducción de dimensionalidad y el escalamiento multidimensional.
+
 \vspace{15pt}
 
 Caso de estudio en la investigación de los murciélagos con alas de disco de Spix (Thyroptera tricolor), biblioteca de funciones llamada warbleR.
@@ -233,6 +246,7 @@ No encontré los principios cientificos en los que se apoya esta aplicación de 
 
 https://www.sononym.net/docs/manual/similarity-search/#similarity-ratings
 
+<<<<<<< HEAD
 \vspace{15pt}
 
 
@@ -242,6 +256,13 @@ https://medium.com/clasificaci%C3%B3n-de-m%C3%BAsica-a-trav%C3%A9s-del-an%C3%A1l
 
 
 
+=======
+
+\vspace{45pt}
+
+
+
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 
 
@@ -264,7 +285,11 @@ https://medium.com/clasificaci%C3%B3n-de-m%C3%BAsica-a-trav%C3%A9s-del-an%C3%A1l
 
 \vspace{30pt}
 
+<<<<<<< HEAD
 Visualizar la relación que hay entre los elementos de un conjunto de muestras y sus frecuencias.
+=======
+Visualizar la relación existente que hay entre los elementos de un conjunto de muestras de sonido y sus frecuencias.
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 \vspace{12pt}
 
@@ -326,6 +351,7 @@ La metodología utilizada se basará en el uso de unas muestras de audio a modo 
 
 \vspace{15pt}
 
+<<<<<<< HEAD
 ## Elementos utilizados:
 
 \vspace{14pt}
@@ -333,6 +359,21 @@ La metodología utilizada se basará en el uso de unas muestras de audio a modo 
 Sintetizador Make Noise 0 Coast (No Coast) su nombre hace alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". 
 
 La introducción de armónicos en la señal generada es el motivo principal en la elección de este sintetizador.
+=======
+## 1. Elementos utilizados:
+
+\vspace{14pt}
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
+
+<center>
+
+<<<<<<< HEAD
+![0 Coast Makenoise](/home/ion/TFM/0Coast.jpeg)
+
+</center>
+
+=======
+Sintetizador musical 0-COAST (No Coast) su nombre intenta hacer alusión a que utiliza técnicas de síntesis de los paradigmas Moog y Buchla (alias "Costa Este" y "Costa Oeste"), sin embargo no es leal a ninguno de los dos, de ahi su nombre 0 COAST "sin costa" y la perspectiva de crear timbres sin la limitación que implica decantarse hacia "una u otra costa". La adición de armónicos en la señal que generada es el motivo principal de uso de este sintetizador.
 
 <center>
 
@@ -340,6 +381,7 @@ La introducción de armónicos en la señal generada es el motivo principal en l
 
 </center>
 
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 http://www.makenoisemusic.com/synthesizers/ohcoast
 
@@ -386,7 +428,11 @@ https://es.wikipedia.org/wiki/Audacity
 
 \newpage
 
+<<<<<<< HEAD
 # Procedimiento
+=======
+## 2. Procedimiento
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 \vspace{14pt}
 
@@ -396,6 +442,11 @@ Para llevar a cabo el proyecto se relacionó las muestras de sonido con el ejemp
 
 
 ``` {r INSTALAR LIBRERIAS}
+<<<<<<< HEAD
+=======
+# INSTALAR LIBRERIAS
+#---------------------------------------------------------------------------------------
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 library(cluster) # dadisy
 library(tuneR)
 library(knitr)
@@ -407,8 +458,18 @@ library(igraph) # hacer mencion al final no lo he hecho
 
 
 \newpage
+<<<<<<< HEAD
 
 \vspace{15pt}
+=======
+
+\vspace{15pt}
+
+Una vez que ya hemos cargado las bibliotecas de funciones (librerias) para analizar las muestras de sonido, creamos un data frame en el que crearemos las columnas a partir de la introducción del nombre de la muestra que queremos comparar, canal (uno o los dos) , inicio de muestra, final y "selec" = 2.  
+
+\vspace{14pt}
+
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 ## 1. Tomar una muestra como referencia.
 
@@ -426,7 +487,13 @@ plantilla <- data.frame(sound.files = "X_pitch-02.wav",
 
 \vspace{15pt}
 
+Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posición del dataframe "**plantilla**"
 
+El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
+
+\vspace{15pt}
+
+<<<<<<< HEAD
 Creamos un objeto "**wave**" a partir del nombre que tenemos en la unica posición del dataframe "**plantilla**"
 
 El objeto "**wave**" tendrá una longitud de 0.2952381 segundos tal y como habiamos indicado en el dataframe, tiempo con el que compararemos todas las demás muestras.
@@ -470,7 +537,20 @@ points(res_wave_referencia, pch=25)
 legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
 
   
+=======
+```{r 01 creamos un objeto wav mediante el dataframe plantilla }
+# creamos un objeto wav  
+wave <- read_wave(plantilla, from = plantilla$start[1], to = plantilla$end[1])
+wave
+```
 
+Establecemos que frecuencia (KHz) queremos visualizar en el eje Y del grafico. 
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
+
+\vspace{15pt}
+```{r 02 limites de frecuencia en Y}
+low_freq = 0
+high_freq= 20
 ```
 
 
@@ -478,6 +558,7 @@ legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
 
 \vspace{15pt}
 
+<<<<<<< HEAD
 Representación espectrográfica bidimensional de la señal de referencia en el tiempo:
 
 
@@ -502,9 +583,30 @@ spectro(wave_referencia,
 points(res_wave_referencia, pch=25)
 legend("topright", "Fundamental frequency", pch=25, bty="n", cex=0.9)
 
+=======
+Representación espectrográfica bidimensional de la señal de referencia a lo largo del tiempo:
+
+
+```{r PLOT  }
+
+# spectro(wave,
+#         wl = 1024,
+#         ovlp = 99,
+#         scale = TRUE,
+#         cont = TRUE,
+#         flim = c(low_freq, high_freq ),
+#         noisereduction = TRUE,
+#         # fastdisp = TRUE,
+#         dB = 'max0',
+#         flog = TRUE,
+#         grid = TRUE,
+#         collevels=seq(-115,0,10),
+#         )
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 ```
 \newpage
 
+<<<<<<< HEAD
 Los parametros seleccionados para representar la señal han sido:
 
 \vspace{15pt}
@@ -529,11 +631,46 @@ Los parametros seleccionados para representar la señal han sido:
 
 \  **collevels**: Conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
 
+=======
+Los parametros elegidos para representar la señal han sido:
+
+\vspace{15pt}
+
+
+\ **wl** = longitud de la ventana para el análisis (número par de puntos)  (by default = 512).
+
+\ **ovlp** = permite la superposición entre dos ventanas sucesivas (en %).
+        
+\ **scale** = traza una escala de color de dB en el lado derecho del espectrograma
+        
+\ **cont** = sobreimprime las líneas de contorno en el espectrograma.
+
+\ **flim** = modificaciones de los límites del eje Y de la frecuencia (en kHz).
+
+\ **noisereduction** = Reducción de ruido en la imagen, no es un filtro de señal.
+
+\  **dB** = "max0" (por defecto) es el tipo de escala con la que vamos a trabajar. Si se establece en NULL, entonces se utiliza una escala lineal.
+        
+\  **flog** = Traza la frecuencia en una escala logarítmica.
+
+\  **grid** = rejilla.	
+
+\  **collevels** = conjunto de niveles que se utilizan para dividir el rango de amplitud del espectrograma (en dB).
+
+\vspace{15pt}
+
+\newpage
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 \vspace{15pt}
 
 Creamos un nuevo dataframe con los archivos de sonido que tenemos en nuestro espacio de trabajo, en este dataframe también estara incluida el nombre de la muestra de referencia que queremos comparar.
 
+<<<<<<< HEAD
+=======
+\vspace{15pt}
+
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 ```{r nuevo dataframe, comment = TRUE}
 sel_tab_1 <- selection_table(whole.recs = TRUE)
 sel_tab_1
@@ -548,16 +685,49 @@ X_pitch-02.wav	selec = 2 y X_pitch-02.wav	selec = 1
 
 \vspace{15pt}
 
+<<<<<<< HEAD
 En el inicio creamos el dataframe "**plantilla**" con una columna selec de valor igual a dos, ahora esta columna nos permitirá diferenciar entre nombres iguales entre las muestras. 
+=======
+Esto es debido a que en el inicio creamos el dataframe "**plantilla**" con una columna selec = 2 y ahora esta columna nos permite diferenciar entre los nombres iguales de las muestras. 
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 
 ```{r sel_tab sel_tab_1 + plantilla}
 sel_tab <- rbind(plantilla, as.data.frame(sel_tab_1))
 
 sel_tab
+<<<<<<< HEAD
+=======
+```
+
+\newpage
+
+
+## Establecemos la comparación de las muestras:
+
+```{r}
+sel_tab$sound.files[1]
 ```
 
 
+Seleccionamos el nombre de la muestra referencia
+```{r}
+sel_tab$selec[1] 
+```
+
+Junto con el select = 2
+
+```{r comparacion muestras}
+comp_matrix <- cbind(paste(sel_tab$sound.files[1],
+                           sel_tab$selec[1], sep = "-"),
+                     sel_tab$sound.files)
+
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
+```
+
+Esta es la relación de muestras que será guardada en un nuevo dataframe llamado "comp_matrix", preparado para pasarlo a la función de correlación en el siguiente paso. 
+
+<<<<<<< HEAD
 
 
 ## 2. Comparación de las muestras:
@@ -565,8 +735,52 @@ sel_tab
 Seleccionamos el nombre de la muestra referencia
 ```{r}
 sel_tab$sound.files[1]
+=======
+\newpage
+
+
+
+
+
+
+
+
+\vspace{15pt}
+
+
+## Funcion de correlación:
+
+En el procesamiento de señales, la correlación cruzada es una medida de similitud de dos series en función del desplazamiento de una con respecto a la otra. Esto también se conoce como un deslizante producto de punto o de desplazamiento interior-producto . Se usa comúnmente para buscar una señal larga para una característica conocida más corta. Tiene aplicaciones en reconocimiento de patrones, análisis de partículas individuales, tomografía electrónica, promediado, criptoanálisis y neurofisiología. 
+
+La correlación cruzada es de naturaleza similar a la convolución de dos funciones. En una autocorrelación, que es la correlación cruzada de una señal consigo misma, siempre habrá un pico en un retraso de cero, y su tamaño será la energía de la señal.
+
+<br /><a href='https://es.qaz.wiki/wiki/Cross-correlation'>Correlación cruzada</a><br />
+
+
+```{r La funcion de correlacion}
+xc_output <- xcorr(X = sel_tab,
+           output = 'list',
+           compare.matrix = comp_matrix,
+           bp = c(low_freq, high_freq),
+           parallel = 4,
+           na.rm = TRUE)
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 ```
 
+Parámetros:
+
+\ X = sel_tab  datos que contiene columnas para archivos de sonido (sound.files), columna con número de selección (selec), tiempo de inicio y final de la señal.
+\ output = 'list': formato de salida. 
+\ compare.matrix = comp_matrix,
+\ bp = c(low_freq, high_freq),
+\ parallel = Numero de nucleos del procesador funcionando en paralelo.
+\ na.rm = todos aquellos NAs producidos cuando las correlaciones cruzadas por pares fallaron son eliminados de los resultados. Esto significa que todas las selecciones con al menos 1 correlación cruzada que fallaron son excluidas.
+
+### HASTA AQUI
+
+\vspace{15pt}
+
+\vspace{15pt}
 
 elegimos selec = 2
 ```{r}
@@ -622,6 +836,9 @@ xcor <- xcorr(sel_tab,
               na.rm = TRUE)
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 
 Parámetros:
@@ -644,6 +861,7 @@ Parámetros:
 
 **Cepstrum de una señal:** Calculo de la transformada de Fourier inversa del espectro de la señal estudiada en escala logarítmica (dB). El cepstrum es de tipo complejo, por tanto, tiene parte real y parte imaginaria. La palabra "cepstrum" es un anagrama de la palabra Spectrum. Invierte el orden de las primeras cuatro letras, reforzando la idea de inversa del spectrum.
 
+<<<<<<< HEAD
 **Escala Mel**: El nombre mel viene de la palabra melodía para indicar que se basa en la percepción humana de los tonos, una escala musical perceptual de tonos juzgados como intervalos equiespaciados por parte de observadores.
 
 
@@ -655,6 +873,11 @@ Parámetros:
 ## 4. Distancias
 
 Cálculo de las disimilitudes o de las distancias percibidas por pares entre las observaciones del conjunto de datos, esta es calculada utilizando medidas de disimilitud restringidas, que miden lo distintos que son dos ejemplos. De esta manera se trata mejorar el algoritmo original de los K vecinos más cercanos, y algunas de sus variantes. 
+=======
+\vspace{15pt}
+
+\vspace{15pt}
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 ```{r}
 dissimilarity <- daisy(xcor)
@@ -674,7 +897,13 @@ modelo <- cmdscale(dissimilarity)
 modelo
 ```
 
+<<<<<<< HEAD
 \newpage
+=======
+\vspace{15pt}
+
+\vspace{15pt}
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
 \vspace{15pt}
 
@@ -699,6 +928,9 @@ sobre $$\mathbb{R}$$
 
 # 3) Visualizacion en grafo
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 \vspace{15pt}
 
@@ -726,6 +958,9 @@ text(xcor[,1],xcor[,2], labels = rownames(xcor), cex = 0.8 )
 par(old.par)
 ```
 
+\vspace{15pt}
+
+\vspace{15pt}
 
 En la parte inferior de las gráficas se observa una sucesión de puntos que corresponden a muestras con frecuencias cada vez mas altas, estas van evolucionando a lo largo del tiempo de manera constante hasta que llega un punto en el que aun avanzando van perdiendo presencia en el eje "Y", esto es así porque conforme va aumentando la frecuencia en las muestras tambien vamos perdiendo compoponente armónica y por ese motivo y porque las muestras no evolucionan de manera lineal. 
 
@@ -743,8 +978,12 @@ valores <- cmdscale(distancia, eig = T)
 ```
 
 \vspace{15pt}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6bc7f0ec9d8b532e6ebbe2c4ad1c7245f0423ab3
 
+\vspace{15pt}
 
 
 
@@ -760,7 +999,9 @@ valores$GOF
 
 \vspace{15pt}
 
+\vspace{15pt}
 
+\vspace{15pt}
 
 
 
@@ -820,7 +1061,9 @@ plot(x, y, col = rep(1:3, each = 10), pch = 19)
 #legend("bottomright", legend = paste("Group", 1:3), col = 1:3, pch = 19, bty = "n")
 ```
 
+\vspace{15pt}
 
+\vspace{15pt}
 
 
 
